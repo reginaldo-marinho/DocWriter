@@ -45,11 +45,11 @@ public class ExtracaoModeloHTML:IExtracaoModelo
 
             var modelo = (from m in mappingModelo.Modelo
                           where  m.Identificador ==  groups[1].Value
-                          select m).First(); 
+                          select m).FirstOrDefault(); 
 
             var HTML = modelo.Html;
 
-            var atributos = PreparaAtributos(groups[1].Value,modelo.Atributo);
+            var atributos = PreparaAtributos(groups[3].Value,modelo.Atributo);
 
             return  $"<{HTML} {atributos}> {groups[4].Value}</{HTML}>";
     }
@@ -65,9 +65,10 @@ public class ExtracaoModeloHTML:IExtracaoModelo
             var atributoHTML = 
             (from _atributo in atributo
             where _atributo.Identificador == atr
-            select _atributo).First();
+            select _atributo).FirstOrDefault();
 
-        if (atributoHTML.IsClass)
+        if (atributoHTML is not null){
+            if (atributoHTML.IsClass)
             AtributoClass += $" {atributoHTML.Identificador}";     
         
         var atributoDesmembrado = atr.Split("=");
@@ -78,6 +79,7 @@ public class ExtracaoModeloHTML:IExtracaoModelo
             AtributosHTML+= $" {atributoHTML.Identificador}=\"{atributoDesmembrado[1]}\"";
             
         }
+        }
         return AtributosHTML+= $" class=\"{AtributoClass}\"";
     }
     public MappingModelo GetMappingModelo(){
@@ -87,6 +89,9 @@ public class ExtracaoModeloHTML:IExtracaoModelo
             MappingModelo? modelo = JsonSerializer.Deserialize<MappingModelo>(json );
             return modelo ;
         }
+    }
+    public void ReplaceModelo(string Mathfuncao,string html,ref string modelo){
+        modelo = modelo.Replace(Mathfuncao,html);
     }
 
  }

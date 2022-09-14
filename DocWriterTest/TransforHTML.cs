@@ -32,8 +32,21 @@ public class TransforHTML
     {
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
        string teste =  extracao.PreparaHTML(maths[0].Groups);  
-         
     }
+
+    [TestMethod]
+    public void ReplaceModelo()
+    {
+        MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
+       string html =  extracao.PreparaHTML(maths[0].Groups);  
+       extracao.ReplaceModelo(maths[0].Groups[1].Value,html,ref texto);
+
+       var retorno = texto;
+
+    }
+
+
+    
 
 
     
