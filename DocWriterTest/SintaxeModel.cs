@@ -1,16 +1,16 @@
 
 using DocWrite;
+using DocWrite.tag;
 using System.Text.RegularExpressions;
 
 namespace DocWriterTest;
 
 [TestClass]
-public class UnitTest1
-{
-    
-    private string texto = @"H(BIS,C=RED){ sage X3} T(){Tudo que e S(BIS,){importante} para voce aplicar no sage}";
+public class SintaxeModel
+{    
+    private string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
     ExtracaoModeloHTML extracao = new ExtracaoModeloHTML();
-    
+    MappingModelo  Modelo;
     [TestMethod]
     public void EncontrarDoisMaths()
     {
@@ -37,7 +37,7 @@ public class UnitTest1
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Match match = maths[0];
         GroupCollection groups = match.Groups;
-        Assert.AreEqual(groups[0].Value,"H(BIS,C=RED){ sage X3}"); 
+        Assert.AreEqual(groups[0].Value,"H(B,I,S,C=RED){ sage X3}"); 
     }
 
     [TestMethod]
@@ -55,7 +55,7 @@ public class UnitTest1
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Match match = maths[0];
         GroupCollection groups = match.Groups;
-        Assert.AreEqual(groups[3].Value,"BIS,C=RED"); 
+        Assert.AreEqual(groups[3].Value,"B,I,S,C=RED"); 
     }
 
 
@@ -76,6 +76,4 @@ public class UnitTest1
         GroupCollection groups = match.Groups;
         Assert.AreEqual(groups[5].Value,"}"); 
     }
-
-
 }

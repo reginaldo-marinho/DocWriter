@@ -8,7 +8,6 @@ namespace DocWrite;
 public class ExtracaoModeloHTML:IExtracaoModelo
  {
     private string ModeloInput;
-
     public ExtracaoModeloHTML(){
     }  
     public ExtracaoModeloHTML(IModeloInput modeloInput){
@@ -41,36 +40,26 @@ public class ExtracaoModeloHTML:IExtracaoModelo
             PreparaMatchGroups(matches, ref modelo);
     }
 
-    public void  PreparaHTML(GroupCollection groups){
+    public string  PreparaHTML(GroupCollection groups){
            MappingModelo mappingModelo =  GetMappingModelo();
 
             var modelo = (from m in mappingModelo.Modelo
                           where  m.Identificador ==  groups[1].Value
                           select m).First(); 
-            
+
             var HTML = modelo.Html;
 
             var atributos = PreparaAtributos(groups[1].Value,modelo.Atributo);
 
-            string model = $"<{HTML} {atributos}> </{HTML}>";
+            return  $"<{HTML} {atributos}> {groups[4].Value}</{HTML}>";
     }
     public string GetAtributos(string identificador,string atributos){
         return "";
     }
-    public MappingModelo GetMappingModelo(){
-        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/docWriter/DocWrite/modelo.json"))
-        {
-            string json = r.ReadToEnd();
-            MappingModelo? modelo = JsonSerializer.Deserialize<MappingModelo>(json );
-            return modelo ;
-        }
-    }
-
     public string PreparaAtributos(string modeloAtributos, Atributo[] atributo){
 
         string AtributosHTML = "";
         string AtributoClass = "";
-
 
         foreach(string atr in modeloAtributos.Split(",")){
             var atributoHTML = 
@@ -80,9 +69,27 @@ public class ExtracaoModeloHTML:IExtracaoModelo
 
         if (atributoHTML.IsClass)
             AtributoClass += $" {atributoHTML.Identificador}";     
+        
+        var atributoDesmembrado = atr.Split("=");
+        if (!atributoHTML.IsClass && atributoDesmembrado.Length == 1)
+            AtributosHTML+= $" {atributoHTML.Html}";
+
+        if (! atributoHTML.IsClass && atributoDesmembrado.Length == 2)
+            AtributosHTML+= $" {atributoHTML.Identificador}=\"{atributoDesmembrado[1]}\"";
+            
         }
         return AtributosHTML+= $" class=\"{AtributoClass}\"";
     }
+    public MappingModelo GetMappingModelo(){
+        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelo.json"))
+        {
+            string json = r.ReadToEnd();
+            MappingModelo? modelo = JsonSerializer.Deserialize<MappingModelo>(json );
+            return modelo ;
+        }
+    }
+
  }
+ 
  
  
