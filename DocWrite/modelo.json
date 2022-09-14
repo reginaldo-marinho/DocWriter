@@ -1,0 +1,25 @@
+{
+    "Modelo":[
+        {
+            "Identificador":"H",
+            "Html":"H1",
+            "Atributo":[
+                {
+                    "Identificador":"N",
+                    "Html":"",
+                    "IsClass":true
+                },
+                {
+                    "Identificador":"I",
+                    "Html":"",
+                    "IsClass":true
+                },
+                {
+                    "Identificador":"S",
+                    "Html":"",
+                    "IsClass":true
+                }
+            ]
+        }
+    ]
+}

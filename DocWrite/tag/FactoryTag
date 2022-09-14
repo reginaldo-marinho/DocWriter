@@ -1,0 +1,14 @@
+using System.Text.RegularExpressions;
+
+namespace DocWrite.tag;
+public class FactoryTag{
+    public string PreparaTag(GroupCollection collection){
+        
+        Console.WriteLine(collection[0].Value);
+        Console.WriteLine(collection[1].Value);
+        Console.WriteLine(collection[2].Value);
+        Console.WriteLine(collection[3].Value);
+        Console.WriteLine(collection[4].Value);
+        return "";
+    }
+}
