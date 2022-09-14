@@ -7,7 +7,7 @@ namespace DocWriterTest;
 [TestClass]
 public class UnitTest1
 {
-
+    
     private string texto = @"H(BIS,C=RED){ sage X3} T(){Tudo que e S(BIS,){importante} para voce aplicar no sage}";
     ExtracaoModeloHTML extracao = new ExtracaoModeloHTML();
     
