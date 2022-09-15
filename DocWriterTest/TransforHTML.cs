@@ -56,14 +56,19 @@ public class TransforHTML
          extracao.ExtrairFuncao();
          textoTest = extracao.GetDocumentoFormatado();
     }
-
-
-     
     [TestMethod]
     public void ChecarBackupFogx()
     {
          string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage}";
           CreatorFiles.CreatorFileFgBackup(textoTest).Wait();
+    }
+     [TestMethod]
+    public void ChecarBackupHTML()
+    {
+          string textoTest = @"H(){s} P(){ P(){ola mundo} S(B,I,S){importante} no sage} L(){}";
+          extracao = new ExtracaoModeloHTML(new ModeloInput(textoTest),new ModeloFuncao());
+          extracao.ExtrairFuncao();
+          CreatorFiles.CreatorFileHTML(extracao.GetDocumentoFormatado()).Wait();
     }
 
 }

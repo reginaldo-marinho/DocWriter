@@ -57,41 +57,48 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         }
         var atributos = PreparaAtributos(groups[3].Value,modelo?.Atributo!);
 
-        string HTML = $"<{modelo?.TagHtml} {atributos}> {groups[4].Value}</{modelo?.TagHtml}>";
+        string HTML = "";
+        if(atributos != "")
+            HTML = $"<{modelo?.TagHtml} {atributos}>{groups[4].Value}</{modelo?.TagHtml}>";
+        if(atributos == "")
+            HTML = $"<{modelo?.TagHtml}>{groups[4].Value}</{modelo?.TagHtml}>";
 
         ReplaceModelo(groups[0].Value,HTML,ref texto);
 
         return "";
         
     }
-    public string GetAtributos(string identificador,string atributos){
-        return "";
-    }
     public string PreparaAtributos(string modeloAtributos, Atributo[] atributo){
 
         string AtributosHTML = "";
         string AtributoClass = "";
 
-        foreach(string atr in modeloAtributos.Split(",")){
+        foreach(string atr in modeloAtributos.Split(","))
+        {
             var atributoHTML = 
             (from _atributo in atributo
             where _atributo.Identificador == atr
             select _atributo).FirstOrDefault();
 
-        if (atributoHTML is not null){
-            if (atributoHTML.IsClass)
-            AtributoClass += $" {atributoHTML.Identificador}";     
-        
-        var atributoDesmembrado = atr.Split("=");
-        if (!atributoHTML.IsClass && atributoDesmembrado.Length == 1)
-            AtributosHTML+= $" {atributoHTML.AtributoHtml}";
-
-        if (! atributoHTML.IsClass && atributoDesmembrado.Length == 2)
-            AtributosHTML+= $" {atributoHTML.Identificador}=\"{atributoDesmembrado[1]}\"";
+            if (atributoHTML is not null)
+            {
+                if (atributoHTML.IsClass)
+                AtributoClass += $"{atributoHTML.Identificador} ";     
             
+                var atributoDesmembrado = atr.Split("=");
+                if (!atributoHTML.IsClass && atributoDesmembrado.Length == 1)
+                    AtributosHTML+= $" {atributoHTML.AtributoHtml}";
+
+                if (!atributoHTML.IsClass && atributoDesmembrado.Length == 2)
+                    AtributosHTML+= $" {atributoHTML.Identificador}=\"{atributoDesmembrado[1]}\"";
+                
+            }
         }
+        if(AtributoClass != ""){
+            return AtributosHTML+= $" class=\"{AtributoClass}\"";
         }
-        return AtributosHTML+= $" class=\"{AtributoClass}\"";
+        return AtributosHTML;
+
     }
     public void ReplaceModelo(string Mathfuncao,string html,ref string modelo){
         modelo = modelo.Replace(Mathfuncao,html);

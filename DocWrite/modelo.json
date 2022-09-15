@@ -41,6 +41,32 @@
                     "IsClass":true
                 }
             ]
+        },
+        {
+            "Identificador":"P",
+            "TagHtml":"p",
+            "Atributo":[
+                {
+                    "Identificador":"B",
+                    "AtributoHtml":"",
+                    "IsClass":true
+                },
+                {
+                    "Identificador":"I",
+                    "AtributoHtml":"",
+                    "IsClass":true
+                },
+                {
+                    "Identificador":"S",
+                    "AtributoHtml":"",
+                    "IsClass":true
+                }
+            ]
+        },
+        {
+            "Identificador":"L",
+            "TagHtml":"hr",
+            "Atributo":[]
         }
     ]
 }
