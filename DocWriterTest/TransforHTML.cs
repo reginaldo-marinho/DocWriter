@@ -65,7 +65,7 @@ public class TransforHTML
      [TestMethod]
     public void ChecarBackupHTML()
     {
-          string textoTest = @"H(){s} P(){ P(){ola mundo} S(B,I,S){importante} no sage} L(){}";
+          string textoTest = @"H(){s} P(){ P(){ola mundo} H(){introdução ao HTML}  S(B,I,S){importante} no sage} L(){}";
           extracao = new ExtracaoModeloHTML(new ModeloInput(textoTest),new ModeloFuncao());
           extracao.ExtrairFuncao();
           CreatorFiles.CreatorFileHTML(extracao.GetDocumentoFormatado()).Wait();
@@ -76,7 +76,23 @@ public class TransforHTML
           CreatorFiles conf = new CreatorFiles("sage-x3.conf");
           conf.ConfiguracoesProjeto();
     }
+     [TestMethod]
+    public void CriarNovaPastaParaProjeto()
+    {
+          var pasta = "documentacao";
+          CreatorFiles conf = new CreatorFiles("sage-x3.conf");
+          conf.CreatorNewPasteForProject(@$"/home/reginaldo/Desenvolvimento/{pasta}");
+    }
+    [TestMethod]
+    public void CriarChecarPagina()
+    {
+          var pasta = "documentacao";
+          var pagina = "introducao";
+          CreatorFiles conf = new CreatorFiles("sage-x3.conf");
+          conf.CriarChecarPagina(@$"/home/reginaldo/Desenvolvimento/{pasta}/{pagina}");
 
-    
-
+          pagina = "tipos de atributos";
+          conf = new CreatorFiles("sage-x3.conf");
+          conf.CriarChecarPagina(@$"/home/reginaldo/Desenvolvimento/{pasta}/{pagina}");
+    }
 }

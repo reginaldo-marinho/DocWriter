@@ -1,9 +1,10 @@
 namespace DocWrite;
 using System.Text.RegularExpressions;
+using System.IO;
 public class CreatorFiles 
 {
      private const string configuracoes = @"/home/reginaldo/Desenvolvimento/DocWriter/";
-     private string Projeto {get;set;}= "Projeto.conf";
+     private string Projeto {get;set;}= "Projeto.fconf";
      public CreatorFiles(string project){
           this.Projeto = project;
      }     
@@ -38,5 +39,45 @@ public class CreatorFiles
           {
                await writer.WriteAsync(docFogx);
           }
+     }
+     public bool CreatorNewPasteForProject(string path)
+     {
+          if (!File.Exists(path))
+          {
+               Directory.CreateDirectory(path);
+               return true;
+          }
+          return false;
+     }
+     public void CriarChecarPagina(string path)
+     {
+          Regex rx = new Regex($@"[^\/]+$",RegexOptions.Compiled);
+          if (!File.Exists(path))
+          {
+               Directory.CreateDirectory(path);
+          }
+          string nomePrincipal = rx.Match(path).Value.Replace(" ","-");
+
+          if (!File.Exists($"{path}/{nomePrincipal}.fogx"))
+          {
+               File.Create($"{path}/{nomePrincipal}.fogx");
+          }
+          if (!File.Exists($"{path}/{nomePrincipal}.css"))
+          {
+               File.Create($"{path}/{nomePrincipal}.css");
+          }
+          if (!File.Exists($"{path}/{nomePrincipal}.html"))
+          {
+               File.Create($"{path}/{nomePrincipal}.html");
+          }
+          if (!File.Exists($"{path}/assets"))
+          {
+               Directory.CreateDirectory($"{path}/assets");
+          }
+          if (!File.Exists($"{path}/docs"))
+          {
+               Directory.CreateDirectory($"{path}/docs");
+          }
+           
      }
 }
