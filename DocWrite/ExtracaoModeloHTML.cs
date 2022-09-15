@@ -8,19 +8,18 @@ namespace DocWrite;
 public class ExtracaoModeloHTML:IExtracaoModelo
  {
     private string ModeloInput;
-    public ExtracaoModeloHTML(){
-    }  
+    public ExtracaoModeloHTML(){}  
     public ExtracaoModeloHTML(IModeloInput modeloInput){
         this.ModeloInput = modeloInput.GetModelo();
     }
     public string ExtrairFuncao(IExpressaoRegular expessaoRegular){
         var mathces = GetMatchCollection(expessaoRegular,ref this.ModeloInput);
+        PreparaMatchGroups(mathces,ref this.ModeloInput);
         return "";
     }
     public string ExtrairCaixa(IExpressaoRegular expessaoRegular){
         return "";
     }
-
     public MatchCollection GetMatchCollection(IExpressaoRegular expessaoRegular,ref string modelo)
     {
         Regex rx = new Regex($@"{expessaoRegular.GetExpressao()}", RegexOptions.Compiled);
@@ -29,29 +28,33 @@ public class ExtracaoModeloHTML:IExtracaoModelo
 
     public void PreparaMatchGroups(MatchCollection matches, ref string modelo)
     {
-        if(matches.Count  < 1){
+        if(matches.Count  < 1)
+        {
             return;
         }
         if (matches.Count >= 1 )
+        {
             foreach (Match match in matches)
             {
-                PreparaHTML(match.Groups); 
+                PreparaHTML(match.Groups,ref modelo); 
             }
-            PreparaMatchGroups(matches, ref modelo);
+        }
+        PreparaMatchGroups(matches, ref modelo);
     }
+    public string  PreparaHTML(GroupCollection groups, ref string texto){
+        MappingModelo mappingModelo =  GetMappingModelo();
 
-    public string  PreparaHTML(GroupCollection groups){
-           MappingModelo mappingModelo =  GetMappingModelo();
+        var modelo = (from m in mappingModelo.Modelo
+                        where  m.Identificador ==  groups[1].Value
+                        select m).FirstOrDefault(); 
+        var atributos = PreparaAtributos(groups[3].Value,modelo?.Atributo!);
 
-            var modelo = (from m in mappingModelo.Modelo
-                          where  m.Identificador ==  groups[1].Value
-                          select m).FirstOrDefault(); 
+        string HTML = $"<{modelo?.TagHtml} {atributos}> {groups[4].Value}</{modelo?.TagHtml}>";
 
-            var HTML = modelo.Html;
+        ReplaceModelo(groups[1].Value,HTML,ref texto);
 
-            var atributos = PreparaAtributos(groups[3].Value,modelo.Atributo);
-
-            return  $"<{HTML} {atributos}> {groups[4].Value}</{HTML}>";
+        return "";
+        
     }
     public string GetAtributos(string identificador,string atributos){
         return "";
@@ -73,7 +76,7 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         
         var atributoDesmembrado = atr.Split("=");
         if (!atributoHTML.IsClass && atributoDesmembrado.Length == 1)
-            AtributosHTML+= $" {atributoHTML.Html}";
+            AtributosHTML+= $" {atributoHTML.AtributoHtml}";
 
         if (! atributoHTML.IsClass && atributoDesmembrado.Length == 2)
             AtributosHTML+= $" {atributoHTML.Identificador}=\"{atributoDesmembrado[1]}\"";
@@ -82,18 +85,17 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         }
         return AtributosHTML+= $" class=\"{AtributoClass}\"";
     }
+    public void ReplaceModelo(string Mathfuncao,string html,ref string modelo){
+        modelo = modelo.Replace(Mathfuncao,html);
+    }
     public MappingModelo GetMappingModelo(){
         using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelo.json"))
         {
             string json = r.ReadToEnd();
-            MappingModelo? modelo = JsonSerializer.Deserialize<MappingModelo>(json );
-            return modelo ;
+            MappingModelo? modelo = JsonSerializer.Deserialize<MappingModelo>(json);
+            return modelo!;
         }
     }
-    public void ReplaceModelo(string Mathfuncao,string html,ref string modelo){
-        modelo = modelo.Replace(Mathfuncao,html);
-    }
-
  }
  
  

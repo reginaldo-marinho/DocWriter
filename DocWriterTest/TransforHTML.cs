@@ -18,11 +18,11 @@ public class TransforHTML
          MappingModelo  Modelo = extracao.GetMappingModelo(); 
          
          var modelo = (from m in Modelo.Modelo
-                          where  m.Identificador ==  "H"
+                          where  m.Identificador == "H"
                           select m).First(); 
      
-        var atributos = extracao.PreparaAtributos("B,I,S",modelo.Atributo);
-       
+        var atributos  = extracao.PreparaAtributos("B,I,S",modelo.Atributo!);
+
        Assert.Equals(atributos, "class=\" B I S\"");
         
     }
@@ -31,14 +31,14 @@ public class TransforHTML
     public void VerificarHTMLFormado()
     {
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
-       string teste =  extracao.PreparaHTML(maths[0].Groups);  
+       string teste =  extracao.PreparaHTML(maths[0].Groups,ref texto);  
     }
 
     [TestMethod]
     public void ReplaceModelo()
     {
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
-       string html =  extracao.PreparaHTML(maths[0].Groups);  
+       string html =  extracao.PreparaHTML(maths[0].Groups,ref texto);  
        extracao.ReplaceModelo(maths[0].Groups[1].Value,html,ref texto);
 
        var retorno = texto;

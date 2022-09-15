@@ -2,21 +2,21 @@
     "Modelo":[
         {
             "Identificador":"H",
-            "Html":"H1",
+            "TagHtml":"h1",
             "Atributo":[
                 {
                     "Identificador":"B",
-                    "Html":"",
+                    "AtributoHtml":"",
                     "IsClass":true
                 },
                 {
                     "Identificador":"I",
-                    "Html":"",
+                    "AtributoHtml":"",
                     "IsClass":true
                 },
                 {
                     "Identificador":"S",
-                    "Html":"",
+                    "AtributoHtml":"",
                     "IsClass":true
                 }
             ]
