@@ -1,9 +1,29 @@
-# DocWriter
-
+# Introdução
 
 DocWriter é um programa usado para criar documentos HTML
 
 Ele está sendo construido para interpretar uma sintaxe de entrada em formato de função que retorna um documento HTML formatado
+
+```
+  P(C=RED,R){Introdução ao projeto DocWriter}
+```
+P: Indicador que contém a representação HTML
+
+ P => ```<p></p>```
+
+(C=RED,R): Indicador de atributos que contém a representação HTML
+  
+  C=RED => color:red;
+  R => Requerid
+  
+  P(C=RED,R) => ```<P requerid color="red"></P>```
+  
+  {Introdução ao projeto DocWriter}: indica o conteúdo da tag
+
+  P(C=RED,R){Introdução ao projeto DocWriter} =>  ```<P requerid color="red">Introdução ao projeto DocWriter</P>```
+
+Na Maioria dos casos o atributo mais utilizado será o 'class'
+
 ```
   // Entrada
   P(N,I,S){Interpretando meu texto}
@@ -12,7 +32,6 @@ Ele está sendo construido para interpretar uma sintaxe de entrada em formato de
   // Saida
   <p class = "N I S">Interpretando meu texto</p>
 ```
-
 ```
  /*CSS de Apoio*/
  .N{
