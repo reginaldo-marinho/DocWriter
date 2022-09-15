@@ -21,19 +21,17 @@ public class TransforHTML
                           where  m.Identificador == "H"
                           select m).First(); 
      
-        var atributos  = extracao.PreparaAtributos("B,I,S",modelo.Atributo!);
+        var atributos  = extracao.PreparaAtributos("B,I,S",modelo.Atributo);
 
-       Assert.Equals(atributos, "class=\" B I S\"");
+       Assert.AreEqual(atributos, " class=\" B I S\"");
         
     }
-
     [TestMethod]
     public void VerificarHTMLFormado()
     {
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
        string teste =  extracao.PreparaHTML(maths[0].Groups,ref texto);  
     }
-
     [TestMethod]
     public void ReplaceModelo()
     {
@@ -42,12 +40,30 @@ public class TransforHTML
        extracao.ReplaceModelo(maths[0].Groups[1].Value,html,ref texto);
 
        var retorno = texto;
-
+    }
+    [TestMethod]
+    public void IndicarIndicadoNaoExiste()
+    {
+         extracao = new ExtracaoModeloHTML(new ModeloInput(texto),new ModeloFuncao());
+         var indicacao =  extracao.AdicionarIndicadorInexistente("XER(B,I,S,C=RED)");
+         Assert.AreEqual(indicacao,"XER????");
+    }
+    [TestMethod]
+    public void ChegarHTMLCriado()
+    {
+         string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage}";
+         extracao = new ExtracaoModeloHTML(new ModeloInput(textoTest),new ModeloFuncao());
+         extracao.ExtrairFuncao();
+         textoTest = extracao.GetDocumentoFormatado();
     }
 
 
-    
+     
+    [TestMethod]
+    public void ChecarBackupFogx()
+    {
+         string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage}";
+          CreatorFiles.CreatorFileFgBackup(textoTest).Wait();
+    }
 
-
-    
 }

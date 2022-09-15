@@ -20,6 +20,27 @@
                     "IsClass":true
                 }
             ]
+        },
+        {
+            "Identificador":"S",
+            "TagHtml":"span",
+            "Atributo":[
+                {
+                    "Identificador":"B",
+                    "AtributoHtml":"",
+                    "IsClass":true
+                },
+                {
+                    "Identificador":"I",
+                    "AtributoHtml":"",
+                    "IsClass":true
+                },
+                {
+                    "Identificador":"S",
+                    "AtributoHtml":"",
+                    "IsClass":true
+                }
+            ]
         }
     ]
 }

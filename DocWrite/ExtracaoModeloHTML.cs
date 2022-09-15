@@ -8,26 +8,29 @@ namespace DocWrite;
 public class ExtracaoModeloHTML:IExtracaoModelo
  {
     private string ModeloInput;
+    IExpressaoRegular ExpessaoRegular;
+    private Regex rx;
     public ExtracaoModeloHTML(){}  
-    public ExtracaoModeloHTML(IModeloInput modeloInput){
+    public ExtracaoModeloHTML(IModeloInput modeloInput,IExpressaoRegular expessaoRegular){
+        this.ExpessaoRegular = expessaoRegular;
         this.ModeloInput = modeloInput.GetModelo();
     }
-    public string ExtrairFuncao(IExpressaoRegular expessaoRegular){
-        var mathces = GetMatchCollection(expessaoRegular,ref this.ModeloInput);
-        PreparaMatchGroups(mathces,ref this.ModeloInput);
-        return "";
+    public string GetDocumentoFormatado(){
+        return ModeloInput;
     }
-    public string ExtrairCaixa(IExpressaoRegular expessaoRegular){
+    public string ExtrairFuncao(){
+        PreparaMatchGroups();
         return "";
     }
     public MatchCollection GetMatchCollection(IExpressaoRegular expessaoRegular,ref string modelo)
     {
-        Regex rx = new Regex($@"{expessaoRegular.GetExpressao()}", RegexOptions.Compiled);
+        rx = new Regex($@"{expessaoRegular.GetExpressao()}", RegexOptions.Compiled);
         return rx.Matches(modelo);
     }
 
-    public void PreparaMatchGroups(MatchCollection matches, ref string modelo)
-    {
+    public void PreparaMatchGroups()
+    {  
+        MatchCollection matches = GetMatchCollection(this.ExpessaoRegular,ref this.ModeloInput);
         if(matches.Count  < 1)
         {
             return;
@@ -36,10 +39,10 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         {
             foreach (Match match in matches)
             {
-                PreparaHTML(match.Groups,ref modelo); 
+                PreparaHTML(match.Groups,ref this.ModeloInput); 
             }
         }
-        PreparaMatchGroups(matches, ref modelo);
+        PreparaMatchGroups();
     }
     public string  PreparaHTML(GroupCollection groups, ref string texto){
         MappingModelo mappingModelo =  GetMappingModelo();
@@ -47,11 +50,16 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         var modelo = (from m in mappingModelo.Modelo
                         where  m.Identificador ==  groups[1].Value
                         select m).FirstOrDefault(); 
+        if (modelo is null)
+        {
+            ReplaceModelo(groups[0].Value,AdicionarIndicadorInexistente(groups[0].Value),ref texto);
+            return "";
+        }
         var atributos = PreparaAtributos(groups[3].Value,modelo?.Atributo!);
 
         string HTML = $"<{modelo?.TagHtml} {atributos}> {groups[4].Value}</{modelo?.TagHtml}>";
 
-        ReplaceModelo(groups[1].Value,HTML,ref texto);
+        ReplaceModelo(groups[0].Value,HTML,ref texto);
 
         return "";
         
@@ -87,6 +95,11 @@ public class ExtracaoModeloHTML:IExtracaoModelo
     }
     public void ReplaceModelo(string Mathfuncao,string html,ref string modelo){
         modelo = modelo.Replace(Mathfuncao,html);
+    }
+    public string AdicionarIndicadorInexistente(string grupo){
+        rx = new Regex(@"^[A-Z]+", RegexOptions.Compiled);
+        var math = rx.Match(grupo);
+        return Regex.Replace(grupo,@"^[A-Z]+",$"{math.Groups[0].Value}????");
     }
     public MappingModelo GetMappingModelo(){
         using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelo.json"))
