@@ -70,5 +70,13 @@ public class TransforHTML
           extracao.ExtrairFuncao();
           CreatorFiles.CreatorFileHTML(extracao.GetDocumentoFormatado()).Wait();
     }
+    [TestMethod]
+    public void ObterConfiguracoes()
+    {
+          CreatorFiles conf = new CreatorFiles("sage-x3.conf");
+          conf.ConfiguracoesProjeto();
+    }
+
+    
 
 }
