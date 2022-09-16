@@ -8,11 +8,12 @@ A(){
 }
 ```
 ## Explicando o modelo de função
-
+Em letra(s) maiúscula(s) o primeiro identificador do modelo, ele representa o código que será convertido em HTML. 
 ```
 [A](){
 }
 ```
+Entre parenteses, são identificadores que alteram o estilo HTML ou que fazem parte da TAG.
 
 
 ```
