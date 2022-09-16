@@ -67,6 +67,17 @@
             "Identificador":"L",
             "TagHtml":"hr",
             "Atributo":[]
+        },
+        {
+            "Identificador":"IM",
+            "TagHtml":"img",
+            "Atributo":[
+                {
+                    "Identificador":"S",
+                    "AtributoHtml":"src",
+                    "IsClass":false
+                }
+            ]
         }
     ]
 }

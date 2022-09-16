@@ -75,22 +75,41 @@ public class ExtracaoModeloHTML:IExtracaoModelo
 
         foreach(string atr in modeloAtributos.Split(","))
         {
+            string identificador ="";
+            string conteudo = "";
+
+            Int32 posiscao = atr.IndexOf("=");
+
+            if ( posiscao > -1)
+            {
+                identificador = atr.Substring(0,posiscao);
+                posiscao+=1;
+                conteudo = atr.Substring(posiscao);
+            }
+            else
+            {
+                identificador = atr;
+            }
+
             var atributoHTML = 
             (from _atributo in atributo
-            where _atributo.Identificador == atr
+            where _atributo.Identificador == identificador
             select _atributo).FirstOrDefault();
 
             if (atributoHTML is not null)
             {
                 if (atributoHTML.IsClass)
-                AtributoClass += $"{atributoHTML.Identificador} ";     
-            
-                var atributoDesmembrado = atr.Split("=");
-                if (!atributoHTML.IsClass && atributoDesmembrado.Length == 1)
+                {
+                    AtributoClass += $"{atributoHTML.Identificador} ";      
+                }
+                if (!atributoHTML.IsClass && conteudo == "")
+                {
                     AtributosHTML+= $" {atributoHTML.AtributoHtml}";
-
-                if (!atributoHTML.IsClass && atributoDesmembrado.Length == 2)
-                    AtributosHTML+= $" {atributoHTML.Identificador}=\"{atributoDesmembrado[1]}\"";
+                }
+                if (!atributoHTML.IsClass && conteudo != "")
+                {
+                    AtributosHTML+= $" {atributoHTML.AtributoHtml}=\"{conteudo}\"";
+                }
                 
             }
         }
