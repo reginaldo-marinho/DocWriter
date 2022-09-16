@@ -63,7 +63,13 @@ public class TransforHTML
 
       [TestMethod]
       public void EstruturaProjeto()
-      {     EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao"),texto);
+      {
+            string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage}";
+            extracao = new ExtracaoModeloHTML(new ModeloInput(textoTest),new ModeloFuncao());
+            extracao.ExtrairFuncao();
+            textoTest = extracao.GetDocumentoFormatado();
+
+            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao"),textoTest);
             projeto.RunProjeto();
       }
 }

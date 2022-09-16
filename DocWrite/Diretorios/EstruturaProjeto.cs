@@ -27,8 +27,7 @@ public class EstruturaProjeto
      }  
      private void CreateFileText(string PathFile)
      {
-          ChecarCriarFile(PathFile);
-           using (FileStream fileStream = File.Open(PathFile, FileMode.Open,FileAccess.ReadWrite))
+          using (FileStream fileStream = File.Open(PathFile, FileMode.OpenOrCreate,FileAccess.ReadWrite))
           {
                Byte[] conteudo = new UTF8Encoding(true).GetBytes(this.Fogx);
 
