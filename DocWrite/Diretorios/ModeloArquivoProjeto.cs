@@ -11,4 +11,5 @@ public class ModeloArquivoProjeto : IModeloArquivoProjeto
      public string Docs {get;set;} = "";
      public string HTML {get;set;} = "";
      public string CSS {get;set;} = "";
+     public string FOGX {get;set;} = "";
 }

@@ -50,7 +50,8 @@ public class TransforHTML
       [TestMethod]
       public void ChegarHTMLCriado()
       {
-            string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage} IM(S=https://image.webmotors.com.br/_fotos/anunciousados/gigante/2022/202207/20220730/honda-cb-600f-hornet-wmimagem13432887665.jpg?s=fill&w=1920&h=1440&q=75){}";
+            string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage} IM(S=https://image.webmotors.com.br/_fotos/anunciousados/gigante/2022/202207/20220730/honda-cb-600f-hornet-wmimagem13432887665.jpg?s=fill&w=1920&h=1440&q=75){}"
+            +"A(L=./introducao){}";
             extracao = new ExtracaoModeloHTML(new ModeloInput(textoTest),new ModeloFuncao());
             extracao.ExtrairFuncao();
             textoTest = extracao.GetDocumentoFormatado();
@@ -62,13 +63,13 @@ public class TransforHTML
       }
 
       [TestMethod]
-      public void EstruturaProjeto()
+      public void PreparaExtruturaProjeto()
       {
-            string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage} IM(S=https://image.webmotors.com.br/_fotos/anunciousados/gigante/2022/202207/20220730/honda-cb-600f-hornet-wmimagem13432887665.jpg?s=fill&w=1920&h=1440&q=75){}";
-            extracao = new ExtracaoModeloHTML(new ModeloInput(textoTest),new ModeloFuncao());
-            extracao.ExtrairFuncao();
-            textoTest = extracao.GetDocumentoFormatado();
-            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","casamentos"),textoTest);
-            projeto.RunProjeto();
+            string Test = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage}  A(L=../introducao/introducao.html){Veja uma instrodução}";
+
+            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","html"),Test);
+            projeto.PreparaEstruturaProjeto();
+            projeto.GravarHTML();
+      
       }
 }

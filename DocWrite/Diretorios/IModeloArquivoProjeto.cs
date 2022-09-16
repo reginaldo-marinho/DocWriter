@@ -10,4 +10,5 @@ public interface IModeloArquivoProjeto
      string Docs {get;set;}
      string HTML {get;set;}
      string CSS {get;set;}
+     string FOGX {get;set;}
 }

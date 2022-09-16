@@ -78,6 +78,17 @@
                     "IsClass":false
                 }
             ]
+        },
+        {
+            "Identificador":"A",
+            "TagHtml":"a",
+            "Atributo":[
+                {
+                    "Identificador":"L",
+                    "AtributoHtml":"href",
+                    "IsClass":false
+                }
+            ]
         }
     ]
 }

@@ -5,5 +5,6 @@ pagina:{livro}/{pagina}
 assets:{pagina}/assets
 docs:{pagina}/docs
 html:{pagina}/{nome}.html
+fogx:{pagina}/{nome}.fogx
 css:{pagina}/{nome}.css
 

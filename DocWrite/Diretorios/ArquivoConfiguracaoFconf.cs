@@ -52,8 +52,11 @@ public class ArquivoConfiguracaoFconf
                               case "css":
                                    modeloArquivo.CSS = ConteudoModeloConfiguracao;
                                    break;
+                              case "fogx":
+                                   modeloArquivo.FOGX = ConteudoModeloConfiguracao;
+                                   break;
                          }
-                         if(linhaProjeto == 8){
+                         if(linhaProjeto == 9){
                               if (modeloArquivo  is not null)
                               {
                                    modeloArquivo.Livro = modeloArquivo.Livro
@@ -70,6 +73,9 @@ public class ArquivoConfiguracaoFconf
                                    .Replace("{pagina}",modeloArquivo.Pagina)
                                    .Replace("{nome}",nomePagina); 
                                    modeloArquivo.CSS = modeloArquivo.CSS
+                                   .Replace("{pagina}",modeloArquivo.Pagina)
+                                   .Replace("{nome}",nomePagina); 
+                                    modeloArquivo.FOGX = modeloArquivo.FOGX
                                    .Replace("{pagina}",modeloArquivo.Pagina)
                                    .Replace("{nome}",nomePagina); 
                               }
