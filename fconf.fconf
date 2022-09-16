@@ -1,0 +1,15 @@
+
+
+
+
+
+
+
+proj:sage
+endpoint:/home/reginaldo/Desenvolvimento/
+paginas:/home/reginaldo/Desenvolvimento/sage/
+assets:{paginas}/assets/
+docs:{paginas}/docs/
+html:{paginas}/{pagina}.html
+css:{paginas}/{pagina}.css
+
