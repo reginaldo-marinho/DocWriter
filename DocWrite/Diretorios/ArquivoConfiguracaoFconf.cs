@@ -5,7 +5,7 @@ using System.IO;
 
 public class ArquivoConfiguracaoFconf
 {
-    public static IModeloArquivoProjeto CheckDiretorio(string projeto)
+    public static IModeloArquivoProjeto CheckDiretorio(string projeto,string pagina)
      {
           var conf = @"/home/reginaldo/Desenvolvimento/DocWriter/fconf.fconf";
           IModeloArquivoProjeto modeloArquivo = new ModeloArquivoProjeto();
@@ -16,14 +16,14 @@ public class ArquivoConfiguracaoFconf
                bool encontrou = false;
                string ChaveModeloConfiguracao ="";
                string ConteudoModeloConfiguracao ="";
-               string line;
+               string linhaEmLeitura;
                
-               while ((line = sr.ReadLine()!) != null)
+               while ((linhaEmLeitura = sr.ReadLine()!) != null)
                {
-                    ChaveModeloConfiguracao = rg.Match(line).Value;
-                    ConteudoModeloConfiguracao = Regex.Replace(line,rg.Match(line).Value+":","");
+                    ChaveModeloConfiguracao = rg.Match(linhaEmLeitura).Value;
+                    ConteudoModeloConfiguracao = Regex.Replace(linhaEmLeitura,rg.Match(linhaEmLeitura).Value+":","");
 
-                    if (line.Equals($"proj:{projeto}"))
+                    if (linhaEmLeitura.Equals($"proj:{projeto}"))
                          encontrou = true;
                     if (encontrou){
                          linhaProjeto++;
@@ -34,22 +34,37 @@ public class ArquivoConfiguracaoFconf
                               case "endpoint":
                                    modeloArquivo.EndPoint = ConteudoModeloConfiguracao;
                                    break;
-                              case "paginas":
-                                   modeloArquivo.Paginas = ConteudoModeloConfiguracao;
+                              case "livro":
+                                   modeloArquivo.Livro = ConteudoModeloConfiguracao;
                                    break;
                               case "assets":
                                    modeloArquivo.Assets = ConteudoModeloConfiguracao;
                                    break;
                               case "docs":
                                    modeloArquivo.Docs = ConteudoModeloConfiguracao;
+                                   break; 
+                              case "html":
+                                   modeloArquivo.HTML = ConteudoModeloConfiguracao;
+                                   break;
+                              case "css":
+                                   modeloArquivo.CSS = ConteudoModeloConfiguracao;
                                    break;
                          }
-                         if(linhaProjeto == 4){
+                         if(linhaProjeto == 7){
+                              if (modeloArquivo  is not null)
+                              {
+                                   modeloArquivo.Livro = modeloArquivo.Livro.Replace("{proj}",modeloArquivo.Projeto);
+                                   modeloArquivo.Assets = modeloArquivo.Assets.Replace("{livro}",modeloArquivo.Livro);
+                                   modeloArquivo.Docs = modeloArquivo.Docs.Replace("{livro}",modeloArquivo.Livro);   
+                                   modeloArquivo.HTML = modeloArquivo.HTML.Replace("{livro}",modeloArquivo.Livro).Replace("{pagina}",pagina);   
+                                   modeloArquivo.CSS = modeloArquivo.CSS.Replace("{livro}",modeloArquivo.Livro).Replace("{pagina}",pagina);  
+                              }
+
                               break;
                          }
                     }              
                }
           }
-          return   modeloArquivo;
+          return   modeloArquivo!;
      }
 }

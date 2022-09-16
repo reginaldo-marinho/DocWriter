@@ -1,15 +1,21 @@
 namespace DocWrite;
 using System.Text.RegularExpressions;
 using System.IO;
-public class CreatorFiles 
+public class EstruturaProjeto 
 {
-     private const string configuracoes = @"/home/reginaldo/Desenvolvimento/DocWriter/";
      private readonly IModeloArquivoProjeto Projeto;
      private readonly string Fogx;
-     public CreatorFiles(IModeloArquivoProjeto configProjeto, string fogx){
+     public EstruturaProjeto(IModeloArquivoProjeto configProjeto, string fogx){
           this.Fogx = fogx;
           this.Projeto = configProjeto;
      } 
+     public void  RunProjeto(){
+          CreateCheckFolder(this.Projeto.Livro);
+          CreateFileText(this.Projeto.CSS);
+          CreateFileText(this.Projeto.HTML);
+          CreateCheckFolder(this.Projeto.Assets);
+          CreateCheckFolder(this.Projeto.Docs);
+     }
      private void  CreateCheckFolder(string Pathfolder)
      {          
           if (!File.Exists(Pathfolder))
@@ -17,12 +23,12 @@ public class CreatorFiles
                Directory.CreateDirectory(Pathfolder);
           }
      }  
-     private async Task  CreateFileText(string PathFile)
+     private void CreateFileText(string PathFile)
      {
           ChecarCriarFile(PathFile);
           using (StreamWriter writer = File.CreateText(PathFile))
           {
-               await writer.WriteAsync(this.Fogx);
+               writer.WriteAsync(this.Fogx).Wait();
           }
      }  
      private void ChecarCriarFile(string path){

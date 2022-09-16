@@ -4,7 +4,9 @@ public interface IModeloArquivoProjeto
 {
      string Projeto {get;set;}
      string EndPoint {get;set;}
-     string Paginas {get;set;}
+     string Livro {get;set;}
      string Assets{get;set;}
      string Docs {get;set;}
+     string HTML {get;set;}
+     string CSS {get;set;}
 }

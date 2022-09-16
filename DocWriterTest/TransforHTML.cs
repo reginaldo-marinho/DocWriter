@@ -57,12 +57,20 @@ public class TransforHTML
             textoTest = extracao.GetDocumentoFormatado();
       }
 
-       [TestMethod]
+      [TestMethod]
       public void CheckDiretorio()
       {
-            var teste =  ArquivoConfiguracaoFconf.CheckDiretorio("mozzila");
-            
+            var teste =  ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao");
       }
+
+       [TestMethod]
+      public void EstruturaProjeto()
+      {     EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao"),texto);
+            projeto.RunProjeto();
+      }
+
+
+      
 
       
 }
