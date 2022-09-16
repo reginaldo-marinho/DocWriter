@@ -1,7 +1,9 @@
 proj:sage
-endpoint:/home/reginaldo/Desenvolvimento/
-livro:/home/reginaldo/Desenvolvimento/{proj}/
-assets:{livro}assets/
-docs:{livro}docs/
-html:{livro}{pagina}.html
-css:{livro}{pagina}.css
+endpoint:/home/reginaldo/Desenvolvimento
+livro:{endpoint}/{proj}
+pagina:{livro}/{pagina}
+assets:{pagina}/assets
+docs:{pagina}/docs
+html:{pagina}/{nome}.html
+css:{pagina}/{nome}.css
+

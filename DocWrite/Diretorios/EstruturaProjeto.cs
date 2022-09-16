@@ -1,6 +1,7 @@
 namespace DocWrite;
 using System.Text.RegularExpressions;
 using System.IO;
+using System.Text;
 public class EstruturaProjeto 
 {
      private readonly IModeloArquivoProjeto Projeto;
@@ -11,6 +12,7 @@ public class EstruturaProjeto
      } 
      public void  RunProjeto(){
           CreateCheckFolder(this.Projeto.Livro);
+          CreateCheckFolder(this.Projeto.Pagina);
           CreateFileText(this.Projeto.CSS);
           CreateFileText(this.Projeto.HTML);
           CreateCheckFolder(this.Projeto.Assets);
@@ -26,12 +28,15 @@ public class EstruturaProjeto
      private void CreateFileText(string PathFile)
      {
           ChecarCriarFile(PathFile);
-          using (StreamWriter writer = File.CreateText(PathFile))
+           using (FileStream fileStream = File.Open(PathFile, FileMode.Open,FileAccess.ReadWrite))
           {
-               writer.WriteAsync(this.Fogx).Wait();
+               Byte[] conteudo = new UTF8Encoding(true).GetBytes(this.Fogx);
+
+               fileStream.Write(conteudo, 0, conteudo.Length);
           }
      }  
      private void ChecarCriarFile(string path){
+          
           if (!File.Exists(path))
           {
                File.Create(path);

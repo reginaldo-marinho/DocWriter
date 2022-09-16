@@ -6,6 +6,7 @@ public class ModeloArquivoProjeto : IModeloArquivoProjeto
      public string Projeto {get;set;} = "";
      public string EndPoint {get;set;} = "";     
      public string Livro {get;set;} = "";
+     public string Pagina {get;set;} = "";
      public string Assets{get;set;} = "";
      public string Docs {get;set;} = "";
      public string HTML {get;set;} = "";

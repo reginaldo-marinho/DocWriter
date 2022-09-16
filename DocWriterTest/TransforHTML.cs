@@ -24,7 +24,6 @@ public class TransforHTML
             var atributos  = extracao.PreparaAtributos("B,I,S",modelo.Atributo);
 
             Assert.AreEqual(atributos, " class=\" B I S\"");
-            
       }
       [TestMethod]
       public void VerificarHTMLFormado()
@@ -56,21 +55,15 @@ public class TransforHTML
             extracao.ExtrairFuncao();
             textoTest = extracao.GetDocumentoFormatado();
       }
-
       [TestMethod]
       public void CheckDiretorio()
       {
             var teste =  ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao");
       }
 
-       [TestMethod]
+      [TestMethod]
       public void EstruturaProjeto()
       {     EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao"),texto);
             projeto.RunProjeto();
       }
-
-
-      
-
-      
 }
