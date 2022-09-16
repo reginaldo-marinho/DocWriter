@@ -2,7 +2,9 @@
 
 DocWriter é um programa usado para criar documentos HTML
 
-Ele interpreta um modelo construído em modelo de função/método, estrutura muito conhecida por desenvolvedores
+Ele interpreta um modelo construído em modelo de função/método, estrutura muito conhecida por desenvolvedores.
+A(){
+}
 ```
   P(C=RED,R){Introdução ao projeto DocWriter}
 ```
