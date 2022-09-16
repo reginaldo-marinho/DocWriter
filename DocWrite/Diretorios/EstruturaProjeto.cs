@@ -41,14 +41,23 @@ public class EstruturaProjeto
                Directory.CreateDirectory(path);
           }
      }
-     public void GravarHTML(){
+     public void Run(){
+          GravarFOGX();
+          GravarHTML();
+     }
+      private void GravarFOGX(){
+          extracao = new ExtracaoModeloHTML(new ModeloInput(this.Fogx),new ModeloFuncao());
+          extracao.ExtrairFuncao();
+          CreateFile(Projeto.FOGX,this.Fogx);
+     }
+     private void GravarHTML(){
           extracao = new ExtracaoModeloHTML(new ModeloInput(this.Fogx),new ModeloFuncao());
           extracao.ExtrairFuncao();
           CreateFile(Projeto.HTML,extracao.GetDocumentoFormatado());
      }
      private void CreateFile(string PathFile,string html)
      {
-          using (FileStream fileStream = File.Open(PathFile, FileMode.OpenOrCreate,FileAccess.ReadWrite))
+          using (FileStream fileStream = File.Open(PathFile, FileMode.Open,FileAccess.ReadWrite))
           {
                Byte[] conteudo = new UTF8Encoding(true).GetBytes(html);
 

@@ -69,7 +69,7 @@ public class TransforHTML
 
             EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","html"),Test);
             projeto.PreparaEstruturaProjeto();
-            projeto.GravarHTML();
+            projeto.Run();
       
       }
 }
