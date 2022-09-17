@@ -27,6 +27,9 @@ public class EstruturaProjeto
                Directory.CreateDirectory(Pathfolder);
           }
      }  
+     private  void ChecarCriarArquivoHTML(string path){
+          ChecarCriarArquivo(path);
+     }
      private void ChecarCriarArquivo(string path)
      {
           if (!File.Exists(path))
@@ -48,12 +51,16 @@ public class EstruturaProjeto
       private void GravarFOGX(){
           extracao = new ExtracaoModeloHTML(new ModeloInput(this.Fogx),new ModeloFuncao());
           extracao.ExtrairFuncao();
-          CreateFile(Projeto.FOGX,this.Fogx);
+          CreateFile(Projeto.FOGX,this.Fogx);          
+
      }
      private void GravarHTML(){
           extracao = new ExtracaoModeloHTML(new ModeloInput(this.Fogx),new ModeloFuncao());
           extracao.ExtrairFuncao();
-          CreateFile(Projeto.HTML,extracao.GetDocumentoFormatado());
+          string estrutura = EstruraInicialHTML();
+          estrutura = Regex.Replace(estrutura,@"{body}",extracao.GetDocumentoFormatado());
+          CreateFile(Projeto.HTML,estrutura);
+
      }
      private void CreateFile(string PathFile,string html)
      {
@@ -63,5 +70,22 @@ public class EstruturaProjeto
 
                fileStream.Write(conteudo, 0, conteudo.Length);
           }
+     }
+
+     private string EstruraInicialHTML(){
+
+          StringBuilder Estrutura = new StringBuilder();
+
+          Estrutura.AppendLine("<!DOCTYPE html>");
+          Estrutura.AppendLine("<html>");
+          Estrutura.AppendLine("   <head>");
+          Estrutura.AppendLine("        <title> {title} </title>");
+          Estrutura.AppendLine(    "</head>");
+          Estrutura.AppendLine("   <body>");
+          Estrutura.AppendLine("        {body}");
+          Estrutura.AppendLine("   </body>");
+          Estrutura.AppendLine("</html>");
+
+          return Estrutura.ToString();
      }  
 }

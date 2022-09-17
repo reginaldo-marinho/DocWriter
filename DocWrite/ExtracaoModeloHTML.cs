@@ -128,7 +128,7 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         return Regex.Replace(grupo,@"^[A-Z]+",$"{math.Groups[0].Value}????");
     }
     public MappingModelo GetMappingModelo(){
-        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelo.json"))
+        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelohtml.json"))
         {
             string json = r.ReadToEnd();
             MappingModelo? modelo = JsonSerializer.Deserialize<MappingModelo>(json);
