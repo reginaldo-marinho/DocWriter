@@ -33,4 +33,7 @@ H(C=red){
 ```
 <h1 color="red;">Introdução ao docwrite<\h1>
 ```
-
+### Tipos de modelos
+No docwrite existem dois tipos de modelos, os de auxílio textual e os de auxílio de interfaces.
+Modelos textuais - são os modelos que indicam parágrafos, listas e tabelas.
+Modelos auxiliares de interface - dão ao documento criado, mais qualidade na sua características, normalmente esse tipo de modelo não aceita parâmetros, já que, no sua própria parametrização as configurações já está definida.
