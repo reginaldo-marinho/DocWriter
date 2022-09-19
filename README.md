@@ -60,3 +60,5 @@ Interpretadores de plataformas disponibilizam seu Interpretador para criar model
 ## Interpretador docwrite
 O Interpretador docwrite interpreta e cria a estrutura do seu projeto de forma que garanta a sua movimentação a qualquer lugar. Vamos olhar com mais detalhe sua construção e o que podemos fazer a partir da sua criação.
 
+### Estrutura Docwrite
+Antes de iniciarmos com a estrutura, vamos imaginar a seguinte situação. Após a efetivação de alguns estagiários de uma empresa, foi necessário iniciar mais alguns contratos com novos estagiários, esses mesmo estagiários estão ansiosos para começar começ a trabalhar e devido a grande quantidade de trabalho que está tendo atualmente, o responsável pelos treinamentos iniciais está ocupado com outras tarefas.
