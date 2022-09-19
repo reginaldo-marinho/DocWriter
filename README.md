@@ -39,3 +39,8 @@ No docwrite existem dois tipos de modelos, os de auxílio textual e os de auxíl
 Modelos textuais - são os modelos que indicam parágrafos, listas e tabelas.
 
 Modelos auxiliares de interface - dão ao documento criado, mais qualidade na sua características, normalmente esse tipo de modelo não aceita parâmetros, já que, na sua própria parametrização as configurações já está definida.
+
+## Construção
+A condução dos documentos docwrite são feitos baseados na estrutura de um livro.
+|Livro|Docwrite|
+Nome livro > Nome do projeto, sumário > Links do Projeto, Títulos > São o título de cada extensão HTML, imagens
