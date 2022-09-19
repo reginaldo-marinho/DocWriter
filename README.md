@@ -46,7 +46,8 @@ A condução dos documentos docwrite são feitos baseados na estrutura de um liv
 |-----|--------|----------|
 |Nome |Nome Projeto||
 |Sumário|Links do Projeto||
-|Títulos|Pagina HTML||
-|Imagens|Assets||
-|Anexos| arquivos e outros||
+|Visual| Página.CSS||
+|Títulos|Pagina.HTML||
+|Imagens|Pasta Assets|Essa pasta pode conter Fotos, vídeos e Áudios.|
+|Anexos| Pasta Dos|Guarda documentos que podem servir para auxílio do leitor.|
 
