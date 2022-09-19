@@ -2,7 +2,7 @@
 
 DocWriter é um programa usado para criar documentos HTML
 
-Ele interpreta um modelo construído em modelo de função/método, estrutura muito conhecida por desenvolvedores.
+Ele interpreta um modelo construído em forma de função/método, estrutura muito conhecida por desenvolvedores.
 ```
 A(){
 }
@@ -52,27 +52,28 @@ A condução dos documentos docwrite são feitos baseados na estrutura de um liv
 |Anexos| Pasta Dos|Guarda documentos que podem servir para auxílio do leitor.|
 
 # O construtor docwrite
-Diferente doutrad estruturas de interpretador/conversor HTML, o docwrite tem estrutura simples que pode ser integrada em qualquer ambiente.
+Diferente de outras estruturas de interpretador/conversor HTML, o docwrite tem estrutura simples que pode ser integrada em qualquer ambiente.
 
 ## Interpretadores de plataformas
-Interpretadores de plataformas disponibilizam seu Interpretador para criar modelos que são Interpretados dentro da sua própria plataforma, o que implica em dizer antes de utiliza-lo você precisa estar relacionado a àquela plataforma.
+Interpretadores de plataformas disponibilizam seu interpretador para criar modelos que são Interpretados dentro da sua própria plataforma, o que implica em dizer que antes de utiliza-lo você precisa estar relacionado a àquela plataforma.
 
 ## Interpretador docwrite
-O Interpretador docwrite interpreta e cria a estrutura do seu projeto de forma que garanta a sua movimentação a qualquer lugar. Vamos olhar com mais detalhe sua construção e o que podemos fazer a partir da sua criação.
+O Interpretador docwrite interpreta e cria a estrutura do seu projeto de forma que garanta a sua movimentação a qualquer lugar, isso permite a criação de documentos que podem ser disponibilizados em qualquer servidor HTTP, como apache, IIS, entre outros. O Docwrite também permite a criação de documentação particular, isso permite ao usuario a liberdade de criar documentos pessoais.
 
 ### Estrutura Docwrite
 Antes de iniciarmos com a estrutura, vamos imaginar a seguinte situação:
 
-"Após a efetivação de alguns estagiários de uma empresa, foi necessário iniciar mais alguns contratos com novos estagiários, esses mesmo estagiários estão ansiosos para começar começ a trabalhar e devido a grande quantidade de trabalho que está tendo atualmente, o responsável pelos treinamentos iniciais está ocupado com outras tarefas."
+"Após a efetivação de alguns estagiários na empresa ***Foguete X***, foi necessário recrutar novos estagiarios.  Esses estagiários estão ansiosos para começar seu novo trabalho e infelismente devido a grande quantidade de trabalho que está tendo atualmente na ***Foguete X***, o responsável pelos treinamentos iniciais encontra-se ocupado com outras tarefas."
 
-O que poderia existir como método paliativo para resolver esse problema?
+Como resolver esse problema?
 
-Poderia existir algum documento PDF, WORD ou qualquer outro que inicie esse novo relacionamento com esses estagiários.
+R: Poderia existir algum documento PDF, WORD ou qualquer outro que inicie esse novo relacionamento com esses estagiários.
 
 O problema dessa resolução é a falta de centralização de conteúdo, falta de atualização e limitação de usabilidade.
 
-Agora para resolver esse problema de forma mais elegante, mais produtiva e de forma mais flexível, poderíamos criar um novo projeto docwrite.
+Agora para resolver esse problema de forma mais elegante, mais produtiva e de forma mais flexível, poderíamos criar um projeto docwrite que direcione inicialmente esse trabalho.
 
+### Criando um Primeiro Projeto 
 1 - O primeiro ponto aqui é criar o nome do projeto, vamos supor que seja uma apresentação inicial da empresa.
 
 Poderíamos cortar o nome assim: apresentacao-empresa
