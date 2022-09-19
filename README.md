@@ -42,7 +42,11 @@ Modelos auxiliares de interface - dão ao documento criado, mais qualidade na su
 
 ## Construção
 A condução dos documentos docwrite são feitos baseados na estrutura de um livro.
-|Livro|Docwrite|
-|-----|--------|
+|Livro|Docwrite|Observação|
+|-----|--------|----------|
+|Nome |Nome Projeto||
+|Sumário|Links do Projeto||
+|Títulos|Pagina HTML||
+|Imagens|Assets||
+|Anexos| arquivos e outros||
 
-Nome livro > Nome do projeto, sumário > Links do Projeto, Títulos > São o título de cada extensão HTML, imagens
