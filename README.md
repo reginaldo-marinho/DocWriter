@@ -7,7 +7,7 @@ Ele interpreta um modelo construído em modelo de função/método, estrutura mu
 A(){
 }
 ```
-## Explicando o modelo de função
+# Explicando o modelo de função
 Em letra(s) maiúscula(s) o primeiro identificador do modelo, ele representa o código que será convertido em HTML. 
 ```
 [A](){
@@ -33,14 +33,14 @@ H(C=red){
 ```
 <h1 color="red;">Introdução ao docwrite<\h1>
 ```
-### Tipos de modelos
+## Tipos de modelos
 No docwrite existem dois tipos de modelos, os de auxílio textual e os de auxílio de interfaces.
 
 Modelos textuais - são os modelos que indicam parágrafos, listas e tabelas.
 
 Modelos auxiliares de interface - dão ao documento criado, mais qualidade na sua características, normalmente esse tipo de modelo não aceita parâmetros, já que, na sua própria parametrização as configurações já está definida.
 
-## Construção
+# Arquitetura de uma Projeto
 A condução dos documentos docwrite são feitos baseados na estrutura de um livro.
 |Livro|Docwrite|Observação|
 |-----|--------|----------|
@@ -50,4 +50,13 @@ A condução dos documentos docwrite são feitos baseados na estrutura de um liv
 |Títulos|Pagina.HTML||
 |Imagens|Pasta Assets|Essa pasta pode conter Fotos, vídeos e Áudios.|
 |Anexos| Pasta Dos|Guarda documentos que podem servir para auxílio do leitor.|
+
+# O construtor docwrite
+Diferente doutrad estruturas de interpretador/conversor HTML, o docwrite tem estrutura simples que pode ser integrada em qualquer ambiente.
+
+## Interpretadores de plataformas
+Interpretadores de plataformas disponibilizam seu Interpretador para criar modelos que são Interpretados dentro da sua própria plataforma, o que implica em dizer antes de utiliza-lo você precisa estar relacionado a àquela plataforma.
+
+## Interpretador docwrite
+O Interpretador docwrite interpreta e cria a estrutura do seu projeto de forma que garanta a sua movimentação a qualquer lugar. Vamos olhar com mais detalhe sua construção e o que podemos fazer a partir da sua criação.
 
