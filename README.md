@@ -13,7 +13,7 @@ Em letra(s) maiúscula(s) o primeiro identificador do modelo, ele representa o c
 [A](){
 }
 ```
-Entre parenteses, são identificadores que alteram o estilo HTML ou que fazem parte da TAG.
+Entre parenteses, são identificadores que alteram o estilo HTML ou parâmetros que podem fazer parte da TAG.
 
 ```
 A[()]{
@@ -35,5 +35,7 @@ H(C=red){
 ```
 ### Tipos de modelos
 No docwrite existem dois tipos de modelos, os de auxílio textual e os de auxílio de interfaces.
+
 Modelos textuais - são os modelos que indicam parágrafos, listas e tabelas.
-Modelos auxiliares de interface - dão ao documento criado, mais qualidade na sua características, normalmente esse tipo de modelo não aceita parâmetros, já que, no sua própria parametrização as configurações já está definida.
+
+Modelos auxiliares de interface - dão ao documento criado, mais qualidade na sua características, normalmente esse tipo de modelo não aceita parâmetros, já que, na sua própria parametrização as configurações já está definida.
