@@ -64,3 +64,7 @@ O Interpretador docwrite interpreta e cria a estrutura do seu projeto de forma q
 Antes de iniciarmos com a estrutura, vamos imaginar a seguinte situação:
 
 "Após a efetivação de alguns estagiários de uma empresa, foi necessário iniciar mais alguns contratos com novos estagiários, esses mesmo estagiários estão ansiosos para começar começ a trabalhar e devido a grande quantidade de trabalho que está tendo atualmente, o responsável pelos treinamentos iniciais está ocupado com outras tarefas."
+
+O que poderia existir como método paliativo para resolver esse problema?
+
+Poderia existir algum documento PDF, WORD ou qualquer outro que inicie esse novo relacionamento com esses estagiários.
