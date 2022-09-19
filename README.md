@@ -71,4 +71,19 @@ Poderia existir algum documento PDF, WORD ou qualquer outro que inicie esse novo
 
 O problema dessa resolução é a falta de centralização de conteúdo, falta de atualização e limitação de usabilidade.
 
+Agora para resolver esse problema de forma mais elegante, mais produtiva e de forma mais flexível, poderíamos criar um novo projeto docwrite.
 
+1 - O primeiro ponto aqui é criar o nome do projeto, vamos supor que seja uma apresentação inicial da empresa.
+
+Poderíamos cortar o nome assim: apresentacao-empresa
+2 - com o nome do projeto definido, poderíamos criar várias páginas, elas podem representar alguns partes importantes da apresentação da empresa.
+
+Importante: Quando criado uma página, a seguinte estrutura será criada.
+
+> Nome projeto (Pasta)
+  > Nome Página (Pasta)
+    > Página (HTML)
+    > Página (CSS)
+    > Assets (Pasta) 
+    > Docs
+   
