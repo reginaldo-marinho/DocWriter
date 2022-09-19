@@ -68,3 +68,7 @@ Antes de iniciarmos com a estrutura, vamos imaginar a seguinte situação:
 O que poderia existir como método paliativo para resolver esse problema?
 
 Poderia existir algum documento PDF, WORD ou qualquer outro que inicie esse novo relacionamento com esses estagiários.
+
+O problema dessa resolução é a falta de centralização de conteúdo, falta de atualização e limitação de usabilidade.
+
+
