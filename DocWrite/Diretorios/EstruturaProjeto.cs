@@ -77,7 +77,9 @@ public class EstruturaProjeto
           Estrutura.AppendLine("        <title> {title} </title>");
           Estrutura.AppendLine(    "</head>");
           Estrutura.AppendLine("   <body>");
+          Estrutura.AppendLine("   <div class=\"container\">");
           Estrutura.AppendLine("        {body}");
+          Estrutura.AppendLine("   <div>");
           Estrutura.AppendLine("   </body>");
           Estrutura.AppendLine("</html>");
 

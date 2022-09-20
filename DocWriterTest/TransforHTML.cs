@@ -84,6 +84,26 @@ public class TransforHTML
                         "TBD(){25}"+
                         "TBD(){M}"+
                   "}"+
+            "}"+
+            "&#128512; &#128512; &#128512; &#128512; &#128512; &#128512; &#128512;"+
+            "IM(SR=https://raw.githubusercontent.com/mdn/beginner-html-site/gh-pages/images/firefox-icon.png){}"+
+            "CODE(){"+
+            "Module Module1"+
+            "Sub Main()"+
+                  "While True"+
+                        "Read value."+
+                        "Dim s As String = Console.ReadLine()\n"+
+                        " Test the value.\n"+
+                        "If s = \"1\" Then"+
+                        "Console.WriteLine(\"One\")\n"+
+                        "ElseIf s = \"2\" Then\n"+
+                        "Console.WriteLine(\"Two\")\n"+
+                        "End If\n"+
+                        "Write the value.\n"+
+                        "Console.WriteLine(\"You typed a\" + s)\n"+
+                  "End While"+
+            "End Sub"+
+            "End Module"+
             "}";
             EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","animais"),Test);
             projeto.Run();

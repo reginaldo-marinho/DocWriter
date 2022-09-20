@@ -79,8 +79,17 @@
         "Identificador":"TBD",
         "TagHtml":"td",
         "Atributos":[]
+    },
+    {
+        "Identificador":"IM",
+        "TagHtml":"img",
+        "Atributos":["B","I","S","C"]
+    },
+    {
+        "Identificador":"CODE",
+        "TagHtml":"pre",
+        "Atributos":[]
     }
-    
 ]	
 
 

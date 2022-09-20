@@ -60,5 +60,11 @@
         "AtributoHtml":"",
         "IsClass":true,
         "Descricao":"caixa de aviso detalhe AZUL"
+    },
+    {
+        "Identificador":"SR",
+        "AtributoHtml":"src",
+        "IsClass":false,
+        "Descricao":"Endereço Imagem"
     }
 ]   
