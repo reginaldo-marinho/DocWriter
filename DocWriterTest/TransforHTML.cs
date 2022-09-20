@@ -15,15 +15,12 @@ public class TransforHTML
       [TestMethod]
       public void PreparaAtributo()
       {
-            MappingModelo  Modelo = extracao.GetMappingModelo(); 
+            ModeloHTML  Modelo = extracao.GetMappingModeloHTML("T"); 
             
-            var modelo = (from m in Modelo.Modelo
-                        where  m.Identificador == "H"
-                        select m).First(); 
       
-            var atributos  = extracao.PreparaAtributos("B,I,S",modelo.Atributo);
+             var atributos  = extracao.PreparaAtributos("B,I,S",Modelo.Atributos!);
 
-            Assert.AreEqual(atributos, " class=\" B I S\"");
+             Assert.AreEqual(atributos, " class=\" B I S\"");
       }
       [TestMethod]
       public void VerificarHTMLFormado()
@@ -65,7 +62,7 @@ public class TransforHTML
       [TestMethod]
       public void PreparaExtruturaProjeto()
       {
-            string Test = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage}  A(L=../introducao/introducao.html){Veja uma instrodução}";
+            string Test = @"T(){s} S(){ P(){ola mundo} S(B,I,S){importante} no sage}  A(L=../introducao/introducao.html){Veja uma instrodução}";
 
             EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","html"),Test);
             projeto.PreparaEstruturaProjeto();

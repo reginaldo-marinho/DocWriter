@@ -1,15 +1,16 @@
 namespace DocWrite.tag;
-public class MappingModelo{
-    public  Modelo[]? Modelo{ get;set;}
- }
-public class Modelo{
+
+public class ModeloHTML{
+    public string? Codigo {get;set;}
     public string? Identificador {get;set;}
     public string? TagHtml {get;set;}
-    public  Atributo[]? Atributo { get;set;}    
+    public  string[]? Atributos  { get;set;} 
  }
 
-public class Atributo{
+public class ModeloAtributo{
+    public string? Codigo {get;set;}
     public string? Identificador {get;set;}
     public string? AtributoHtml {get;set;}
-    public bool IsClass {get;set;}
+    public  bool IsClass  { get;set;} 
+    public  string? Descricao  { get;set;} 
  }

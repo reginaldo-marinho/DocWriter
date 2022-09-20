@@ -45,30 +45,29 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         PreparaMatchGroups();
     }
     public string  PreparaHTML(GroupCollection groups, ref string texto){
-        MappingModelo mappingModelo =  GetMappingModelo();
-
-        var modelo = (from m in mappingModelo.Modelo
-                        where  m.Identificador ==  groups[1].Value
-                        select m).FirstOrDefault(); 
-        if (modelo is null)
+        ModeloHTML mappingModelo =  GetMappingModeloHTML(groups[1].Value);
+ 
+        if (mappingModelo is null)
         {
             ReplaceModelo(groups[0].Value,AdicionarIndicadorInexistente(groups[0].Value),ref texto);
             return "";
         }
-        var atributos = PreparaAtributos(groups[3].Value,modelo?.Atributo!);
-
+        string atributos = "";
         string HTML = "";
+
+        atributos = PreparaAtributos(groups[3].Value,mappingModelo.Atributos!);
+
         if(atributos != "")
-            HTML = $"<{modelo?.TagHtml} {atributos}>{groups[4].Value}</{modelo?.TagHtml}>";
+            HTML = $"<{mappingModelo?.TagHtml} {atributos}>{groups[4].Value}</{mappingModelo?.TagHtml}>";
         if(atributos == "")
-            HTML = $"<{modelo?.TagHtml}>{groups[4].Value}</{modelo?.TagHtml}>";
+            HTML = $"<{mappingModelo?.TagHtml}>{groups[4].Value}</{mappingModelo?.TagHtml}>";
 
-        ReplaceModelo(groups[0].Value,HTML,ref texto);
-
+        ReplaceModelo(groups[0].Value,HTML,ref texto);   
+        
         return "";
         
     }
-    public string PreparaAtributos(string modeloAtributos, Atributo[] atributo){
+    public string PreparaAtributos(string modeloAtributos, string[] atributos){
 
         string AtributosHTML = "";
         string AtributoClass = "";
@@ -90,34 +89,39 @@ public class ExtracaoModeloHTML:IExtracaoModelo
             {
                 identificador = atr;
             }
+            // Verifica se o atributo passado no modelo de função existe na sua lista de atributos permitidos 
+            var ExisteAtributo = (
+                            from atrib in atributos
+                            where atrib == identificador
+                            select atrib
+                            ).FirstOrDefault();
 
-            var atributoHTML = 
-            (from _atributo in atributo
-            where _atributo.Identificador == identificador
-            select _atributo).FirstOrDefault();
-
-            if (atributoHTML is not null)
+            if (ExisteAtributo is not null)
             {
-                if (atributoHTML.IsClass)
+                ModeloAtributo atributoHTML;
+
+                atributoHTML =  GetMappingModeloAtributo(identificador);
+                if (atributoHTML is not null)
                 {
-                    AtributoClass += $"{atributoHTML.Identificador} ";      
+                    if (atributoHTML.IsClass)
+                    {
+                        AtributoClass += $"{atributoHTML.Identificador} ";      
+                    }
+                    if (!atributoHTML.IsClass && conteudo == "")
+                    {
+                        AtributosHTML+= $" {atributoHTML.AtributoHtml}";
+                    }
+                    if (!atributoHTML.IsClass && conteudo != "")
+                    {
+                        AtributosHTML+= $" {atributoHTML.AtributoHtml}=\"{conteudo}\"";
+                    }        
                 }
-                if (!atributoHTML.IsClass && conteudo == "")
-                {
-                    AtributosHTML+= $" {atributoHTML.AtributoHtml}";
-                }
-                if (!atributoHTML.IsClass && conteudo != "")
-                {
-                    AtributosHTML+= $" {atributoHTML.AtributoHtml}=\"{conteudo}\"";
-                }
-                
             }
         }
         if(AtributoClass != ""){
             return AtributosHTML+= $" class=\"{AtributoClass}\"";
         }
         return AtributosHTML;
-
     }
     public void ReplaceModelo(string Mathfuncao,string html,ref string modelo){
         modelo = modelo.Replace(Mathfuncao,html);
@@ -127,14 +131,28 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         var math = rx.Match(grupo);
         return Regex.Replace(grupo,@"^[A-Z]+",$"{math.Groups[0].Value}????");
     }
-    public MappingModelo GetMappingModelo(){
+    public ModeloHTML GetMappingModeloHTML(string identificador){
         using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelohtml.json"))
         {
             string json = r.ReadToEnd();
-            MappingModelo? modelo = JsonSerializer.Deserialize<MappingModelo>(json);
-            return modelo!;
+            return (from modeloHTML in  JsonSerializer.Deserialize<ModeloHTML[]>(json)
+                where modeloHTML.Identificador == identificador
+                select modeloHTML
+             ).FirstOrDefault()!;      
         }
     }
+    public ModeloAtributo GetMappingModeloAtributo(string atributo){
+        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelocss.json"))
+        {
+            string json = r.ReadToEnd();
+
+            return (from modeloCSS in  JsonSerializer.Deserialize<ModeloAtributo[]>(json)
+                where modeloCSS.Identificador == atributo
+                select modeloCSS
+             ).FirstOrDefault()!;            
+        }
+    }
+    
  }
  
  

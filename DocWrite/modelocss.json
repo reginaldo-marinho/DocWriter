@@ -1,0 +1,52 @@
+[
+    {
+
+        "Codigo":"",
+        "Identificador":"B",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"Bold (Italico)"
+    },
+    {
+        "Identificador":"I",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"Italico"
+    },
+    {
+        "Identificador":"S",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"Sublinhado"
+    },
+    {
+        "Identificador":"C",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"Cor"
+    },
+    {
+        "Identificador":"CR",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"Cor Realce"
+    },
+    {
+        "Identificador":"ALE",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"ALinhamento Esquerdo"
+    },
+    {
+        "Identificador":"ALC",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"ALinhamento Centralizado"
+    },
+    {
+        "Identificador":"ALD",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"ALinhamendo Direito"
+    }
+]

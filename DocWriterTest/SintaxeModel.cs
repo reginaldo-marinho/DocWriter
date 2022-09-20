@@ -10,7 +10,6 @@ public class SintaxeModel
 {    
     private string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
     ExtracaoModeloHTML extracao = new ExtracaoModeloHTML();
-    MappingModelo  Modelo;
     [TestMethod]
     public void EncontrarDoisMaths()
     {
