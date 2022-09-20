@@ -66,5 +66,11 @@
         "AtributoHtml":"src",
         "IsClass":false,
         "Descricao":"Endereço Imagem"
-    }
+    },
+    {
+        "Identificador":"CONTROLS",
+        "AtributoHtml":"controls",
+        "IsClass":false,
+        "Descricao":"Habilita os botões de controle na tag video"
+    }    
 ]   

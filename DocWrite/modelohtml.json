@@ -89,6 +89,12 @@
         "Identificador":"CODE",
         "TagHtml":"pre",
         "Atributos":[]
+    },
+    {
+        "Identificador":"VIDEO",
+        "TagHtml":"video",
+        "Atributos":[],
+        "AtributosDefaut":["CONTROLS"]
     }
 ]	
 
