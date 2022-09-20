@@ -9,12 +9,13 @@ namespace DocWriterTest;
 [TestClass]
 public class TransforHTML
 {
-      private string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
-      ExtracaoModelo extracao = new ExtracaoModelo();
+      string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
+      ExtracaoModelo extracao;
       
       [TestMethod]
       public void PreparaAtributo()
       {
+            extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
             ModeloHTML  Modelo = extracao.GetMappingModeloHTML("T"); 
             
       
@@ -25,12 +26,14 @@ public class TransforHTML
       [TestMethod]
       public void VerificarHTMLFormado()
       {
+            extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
             MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
             string teste =  extracao.PreparaHTML(maths[0].Groups,ref texto);  
       }
       [TestMethod]
       public void ReplaceModelo()
       {
+            extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
             MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
             string html =  extracao.PreparaHTML(maths[0].Groups,ref texto);  
             extracao.ReplaceModelo(maths[0].Groups[1].Value,html,ref texto);

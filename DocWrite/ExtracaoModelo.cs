@@ -5,13 +5,12 @@ using System.Linq;
 using DocWrite.tag;
 
 namespace DocWrite;
-public class ExtracaoModelo:IExtracaoModelo
+public class ExtracaoModelo:IExtracaoFuncao
  {
     private string ModeloInput;
     IExpressaoRegular ExpessaoRegular;
-    private Regex rx;
-    public ExtracaoModelo(){}  
-    public ExtracaoModelo(IModeloInput modeloInput,IExpressaoRegular expessaoRegular){
+    public ExtracaoModelo(IModeloInput modeloInput,IExpressaoRegular expessaoRegular)
+    {
         this.ExpessaoRegular = expessaoRegular;
         this.ModeloInput = modeloInput.GetModelo();
     }
@@ -24,7 +23,7 @@ public class ExtracaoModelo:IExtracaoModelo
     }
     public MatchCollection GetMatchCollection(IExpressaoRegular expessaoRegular,ref string modelo)
     {
-        rx = new Regex($@"{expessaoRegular.GetExpressao()}", RegexOptions.Compiled);
+        Regex rx = new Regex($@"{expessaoRegular.GetExpressao()}", RegexOptions.Compiled);
         return rx.Matches(modelo);
     }
 
@@ -70,30 +69,43 @@ public class ExtracaoModelo:IExtracaoModelo
         modelo = modelo.Replace(Mathfuncao,html);
     }
     public string AdicionarIndicadorInexistente(string grupo){
-        rx = new Regex(@"^[A-Z]+", RegexOptions.Compiled);
+        Regex  rx = new Regex(@"^[A-Z]+", RegexOptions.Compiled);
         var math = rx.Match(grupo);
         return Regex.Replace(grupo,@"^[A-Z]+",$"{math.Groups[0].Value}????");
     }
-    public ModeloHTML GetMappingModeloHTML(string identificador){
-        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelohtml.json"))
-        {
-            string json = r.ReadToEnd();
-            return (from modeloHTML in  JsonSerializer.Deserialize<ModeloHTML[]>(json)
-                where modeloHTML.Identificador == identificador
-                select modeloHTML
-             ).FirstOrDefault()!;      
-        }
-    }
-    public ModeloAtributo GetMappingModeloAtributo(string atributo){
-        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/modelocss.json"))
-        {
-            string json = r.ReadToEnd();
 
-            return (from modeloCSS in  JsonSerializer.Deserialize<ModeloAtributo[]>(json)
-                where modeloCSS.Identificador == atributo
-                select modeloCSS
-             ).FirstOrDefault()!;            
+    public string PreparaAtributos(string modeloAtributos, string[] atributosDefaut)
+    {
+              
+        Atributo Atributo = new Atributo(){
+                AtributoClass = "",
+                AtributosHTML = ""
+        };
+        Atributo ReturnAtributo;
+
+        if (atributosDefaut is not null)
+        {
+            foreach (var defaut in atributosDefaut)
+            {
+                ReturnAtributo =  GetAtributo(defaut);   
+                Atributo.AtributoClass+= $" {ReturnAtributo.AtributoClass}"; 
+                Atributo.AtributosHTML+= $" {ReturnAtributo.AtributosHTML}"; 
+            }
         }
+        foreach(string atr in modeloAtributos.Split(","))
+        {
+            if (atr == "")
+            {
+                break;
+            }
+            ReturnAtributo =  GetAtributo(atr);   
+            Atributo.AtributoClass+= $" {ReturnAtributo.AtributoClass}"; 
+            Atributo.AtributosHTML+= $" {ReturnAtributo.AtributosHTML}"; 
+        }
+        if(Atributo.AtributoClass != ""){
+            return Atributo.AtributosHTML+= $" class=\"{Atributo.AtributoClass}\"";
+        }
+        return Atributo.AtributosHTML;
     }
 
     public Atributo GetAtributo(string atributo){
@@ -140,39 +152,28 @@ public class ExtracaoModelo:IExtracaoModelo
         }
         return new Atributo {AtributosHTML = AtributosHTML, AtributoClass = AtributoClass};
     }
-    public string PreparaAtributos(string modeloAtributos, string[] atributosDefaut)
-    {
-              
-        Atributo Atributo = new Atributo(){
-                AtributoClass = "",
-                AtributosHTML = ""
-        };
-        Atributo ReturnAtributo;
-
-        if (atributosDefaut is not null)
+    public ModeloHTML GetMappingModeloHTML(string identificador){
+        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/tagsHTML.json"))
         {
-            foreach (var defaut in atributosDefaut)
-            {
-                ReturnAtributo =  GetAtributo(defaut);   
-                Atributo.AtributoClass+= $" {ReturnAtributo.AtributoClass}"; 
-                Atributo.AtributosHTML+= $" {ReturnAtributo.AtributosHTML}"; 
-            }
+            string json = r.ReadToEnd();
+            return (from modeloHTML in  JsonSerializer.Deserialize<ModeloHTML[]>(json)
+                where modeloHTML.Identificador == identificador
+                select modeloHTML
+             ).FirstOrDefault()!;      
         }
-        foreach(string atr in modeloAtributos.Split(","))
-        {
-            if (atr == "")
-            {
-                break;
-            }
-            ReturnAtributo =  GetAtributo(atr);   
-            Atributo.AtributoClass+= $" {ReturnAtributo.AtributoClass}"; 
-            Atributo.AtributosHTML+= $" {ReturnAtributo.AtributosHTML}"; 
-        }
-        if(Atributo.AtributoClass != ""){
-            return Atributo.AtributosHTML+= $" class=\"{Atributo.AtributoClass}\"";
-        }
-        return Atributo.AtributosHTML;
     }
+    public ModeloAtributo GetMappingModeloAtributo(string atributo){
+        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/Atributos.json"))
+        {
+            string json = r.ReadToEnd();
+
+            return (from modeloCSS in  JsonSerializer.Deserialize<ModeloAtributo[]>(json)
+                where modeloCSS.Identificador == atributo
+                select modeloCSS
+             ).FirstOrDefault()!;            
+        }
+    }
+
  }
  
  

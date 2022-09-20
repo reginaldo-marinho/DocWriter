@@ -2,8 +2,8 @@ namespace DocWrite;
 
 public class MaquinaExtracao
  {
-    private  IExtracaoModelo ExtracaoModelo;
-    public MaquinaExtracao(IExtracaoModelo extracaoModelo){
+    private  IExtracaoFuncao ExtracaoModelo;
+    public MaquinaExtracao(IExtracaoFuncao extracaoModelo){
         this.ExtracaoModelo = extracaoModelo;
     }
 

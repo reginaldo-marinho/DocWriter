@@ -9,10 +9,11 @@ namespace DocWriterTest;
 public class SintaxeModel
 {    
     private string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
-    ExtracaoModelo extracao = new ExtracaoModelo();
+    ExtracaoModelo extracao;
     [TestMethod]
     public void EncontrarDoisMaths()
     {
+        extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
         // 1 => H(BIS,C=RED){ sage X3}
         // 2 => S(BIS,){importante}
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
@@ -22,6 +23,7 @@ public class SintaxeModel
     [TestMethod]
     public void EncontrarCincoGrupos()
     {
+        extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         foreach (Match match in maths)
         {
@@ -33,6 +35,7 @@ public class SintaxeModel
     [TestMethod]
     public void EncontrarGrupoCompleto()
     {
+        extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Match match = maths[0];
         GroupCollection groups = match.Groups;
@@ -42,6 +45,7 @@ public class SintaxeModel
     [TestMethod]
     public void EncontrarGrupoUM()
     {
+        extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Match match = maths[0];
         GroupCollection groups = match.Groups;
@@ -51,6 +55,7 @@ public class SintaxeModel
      [TestMethod]
     public void EncontrarGrupoTRES()
     {
+        extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Match match = maths[0];
         GroupCollection groups = match.Groups;
@@ -61,6 +66,7 @@ public class SintaxeModel
     [TestMethod]
     public void EncontrarGrupoQUATRO()
     {
+        extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Match match = maths[0];
         GroupCollection groups = match.Groups;
@@ -70,6 +76,7 @@ public class SintaxeModel
     [TestMethod]
     public void EncontrarGrupoCINCO()
     {
+        extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Match match = maths[0];
         GroupCollection groups = match.Groups;
