@@ -65,9 +65,7 @@ public class TransforHTML
             string Test = @"T(){HTML básico}"+
             "HTML (Linguagem de Marcação de Hipertexto) é o código que você usa para estruturar uma página"+      
             "ALERT1(){Meu gatinho é muito mal humorado}";
-            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","html"),Test);
-            projeto.PreparaEstruturaProjeto();
+            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao"),Test);
             projeto.Run();
-      
       }
 }

@@ -11,22 +11,15 @@ public class EstruturaProjeto
           this.Fogx = fogx;
           this.Projeto = configProjeto;
      } 
-     public void  PreparaEstruturaProjeto(){
-          CreateCheckFolder(this.Projeto.Livro);
-          CreateCheckFolder(this.Projeto.Pagina);
+     private void  ChecaPreparaEstruturaProjeto(){
+          ChecarCriarDiretorio(this.Projeto.Livro);
+          ChecarCriarDiretorio(this.Projeto.Pagina);
           ChecarCriarArquivo(this.Projeto.CSS);
           ChecarCriarArquivo(this.Projeto.HTML);
           ChecarCriarArquivo(this.Projeto.FOGX);
-          CreateCheckFolder(this.Projeto.Assets);
-          CreateCheckFolder(this.Projeto.Docs);
+          ChecarCriarDiretorio(this.Projeto.Assets);
+          ChecarCriarDiretorio(this.Projeto.Docs);
      }
-     private void  CreateCheckFolder(string Pathfolder)
-     {          
-          if (!File.Exists(Pathfolder))
-          {
-               Directory.CreateDirectory(Pathfolder);
-          }
-     }  
      private  void ChecarCriarArquivoHTML(string path){
           ChecarCriarArquivo(path);
      }
@@ -36,6 +29,7 @@ public class EstruturaProjeto
           {
                File.Create(path);
           }
+
      }
      private void ChecarCriarDiretorio(string path)
      {
@@ -45,6 +39,7 @@ public class EstruturaProjeto
           }
      }
      public void Run(){
+          ChecaPreparaEstruturaProjeto();
           GravarFOGX();
           GravarHTML();
      }
@@ -64,11 +59,11 @@ public class EstruturaProjeto
      }
      private void CreateFile(string PathFile,string html)
      {
-          using (FileStream fileStream = File.Open(PathFile, FileMode.Open,FileAccess.ReadWrite))
+          using (FileStream fileStream = File.Open(PathFile,FileMode.OpenOrCreate))
           {
+               fileStream.Seek(0, SeekOrigin.End);
                Byte[] conteudo = new UTF8Encoding(true).GetBytes(html);
-
-               fileStream.Write(conteudo, 0, conteudo.Length);
+               fileStream.WriteAsync(conteudo, 0, conteudo.Length).Wait();
           }
      }
 
