@@ -48,5 +48,17 @@
         "AtributoHtml":"",
         "IsClass":true,
         "Descricao":"ALinhamendo Direito"
+    },
+    {
+        "Identificador":"ALERT",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"base caixa de aviso"
+    },
+    {
+        "Identificador":"ALERT1",
+        "AtributoHtml":"",
+        "IsClass":true,
+        "Descricao":"caixa de aviso detalhe AZUL"
     }
 ]

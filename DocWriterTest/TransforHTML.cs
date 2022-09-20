@@ -18,7 +18,7 @@ public class TransforHTML
             ModeloHTML  Modelo = extracao.GetMappingModeloHTML("T"); 
             
       
-             var atributos  = extracao.PreparaAtributos("B,I,S",Modelo.Atributos!);
+             var atributos  = extracao.PreparaAtributos("B,I,S",Modelo.Atributos!,Modelo.AtributosDefaut!);
 
              Assert.AreEqual(atributos, " class=\" B I S\"");
       }
@@ -62,7 +62,7 @@ public class TransforHTML
       [TestMethod]
       public void PreparaExtruturaProjeto()
       {
-            string Test = @"T(){s} S(){ P(){ola mundo} S(B,I,S){importante} no sage}  A(L=../introducao/introducao.html){Veja uma instrodução}";
+            string Test = @"ALERT1(){teste de aviso}";
 
             EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","html"),Test);
             projeto.PreparaEstruturaProjeto();

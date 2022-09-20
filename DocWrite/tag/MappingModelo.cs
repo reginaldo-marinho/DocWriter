@@ -5,6 +5,8 @@ public class ModeloHTML{
     public string? Identificador {get;set;}
     public string? TagHtml {get;set;}
     public  string[]? Atributos  { get;set;} 
+    public  string[]? AtributosDefaut  { get;set;} 
+    
  }
 
 public class ModeloAtributo{

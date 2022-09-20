@@ -79,6 +79,7 @@ public class EstruturaProjeto
           Estrutura.AppendLine("<!DOCTYPE html>");
           Estrutura.AppendLine("<html>");
           Estrutura.AppendLine("   <head>");
+          Estrutura.AppendLine("        <link rel=\"stylesheet\" type=\"text/css\" href=\"/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/style.css\">");
           Estrutura.AppendLine("        <title> {title} </title>");
           Estrutura.AppendLine(    "</head>");
           Estrutura.AppendLine("   <body>");

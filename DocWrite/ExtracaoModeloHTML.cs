@@ -55,7 +55,7 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         string atributos = "";
         string HTML = "";
 
-        atributos = PreparaAtributos(groups[3].Value,mappingModelo.Atributos!);
+        atributos = PreparaAtributos(groups[3].Value,mappingModelo.Atributos!,mappingModelo.AtributosDefaut!);
 
         if(atributos != "")
             HTML = $"<{mappingModelo?.TagHtml} {atributos}>{groups[4].Value}</{mappingModelo?.TagHtml}>";
@@ -67,13 +67,25 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         return "";
         
     }
-    public string PreparaAtributos(string modeloAtributos, string[] atributos){
+    public string PreparaAtributos(string modeloAtributos, string[] atributos,string[] atributosDefaut)
+    {
 
         string AtributosHTML = "";
         string AtributoClass = "";
-
+        
+        if (atributosDefaut is not null)
+        {
+            foreach (var defaut in atributosDefaut)
+            {
+                AtributosHTML += PreparaAtributos(defaut,null,null);   
+            }
+        }
         foreach(string atr in modeloAtributos.Split(","))
         {
+            if (atr == "")
+            {
+                break;
+            }
             string identificador ="";
             string conteudo = "";
 
@@ -90,32 +102,24 @@ public class ExtracaoModeloHTML:IExtracaoModelo
                 identificador = atr;
             }
             // Verifica se o atributo passado no modelo de função existe na sua lista de atributos permitidos 
-            var ExisteAtributo = (
-                            from atrib in atributos
-                            where atrib == identificador
-                            select atrib
-                            ).FirstOrDefault();
 
-            if (ExisteAtributo is not null)
+
+            ModeloAtributo atributoHTML =  GetMappingModeloAtributo(identificador);
+
+            if (atributoHTML is not null)
             {
-                ModeloAtributo atributoHTML;
-
-                atributoHTML =  GetMappingModeloAtributo(identificador);
-                if (atributoHTML is not null)
+                if (atributoHTML.IsClass)
                 {
-                    if (atributoHTML.IsClass)
-                    {
-                        AtributoClass += $"{atributoHTML.Identificador} ";      
-                    }
-                    if (!atributoHTML.IsClass && conteudo == "")
-                    {
-                        AtributosHTML+= $" {atributoHTML.AtributoHtml}";
-                    }
-                    if (!atributoHTML.IsClass && conteudo != "")
-                    {
-                        AtributosHTML+= $" {atributoHTML.AtributoHtml}=\"{conteudo}\"";
-                    }        
+                    AtributoClass += $"{atributoHTML.Identificador} ";      
                 }
+                if (!atributoHTML.IsClass && conteudo == "")
+                {
+                    AtributosHTML+= $" {atributoHTML.AtributoHtml}";
+                }
+                if (!atributoHTML.IsClass && conteudo != "")
+                {
+                    AtributosHTML+= $" {atributoHTML.AtributoHtml}=\"{conteudo}\"";
+                }        
             }
         }
         if(AtributoClass != ""){
@@ -152,7 +156,6 @@ public class ExtracaoModeloHTML:IExtracaoModelo
              ).FirstOrDefault()!;            
         }
     }
-    
  }
  
  
