@@ -44,8 +44,43 @@
         "TagHtml":"div",
         "Atributos":[],
         "AtributosDefaut":["ALERT","ALERT1"]
-
+    },
+    {
+        "Identificador":"LO",
+        "TagHtml":"ol",
+        "Atributos":[]
+    },
+    {
+        "Identificador":"LNO",
+        "TagHtml":"ul",
+        "Atributos":[]
+    },
+    {
+        "Identificador":"LI",
+        "TagHtml":"li",
+        "Atributos":[]
+    },
+    {
+        "Identificador":"TB",
+        "TagHtml":"table",
+        "Atributos":[]
+    },
+    {
+        "Identificador":"TBR",
+        "TagHtml":"tr",
+        "Atributos":[]
+    },
+    {
+        "Identificador":"TBH",
+        "TagHtml":"th",
+        "Atributos":[]
+    },
+    {
+        "Identificador":"TBD",
+        "TagHtml":"td",
+        "Atributos":[]
     }
+    
 ]	
 
 

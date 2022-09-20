@@ -2,6 +2,7 @@ namespace DocWrite;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
+
 public class EstruturaProjeto 
 {
      private readonly IModeloArquivoProjeto Projeto;
@@ -59,11 +60,9 @@ public class EstruturaProjeto
      }
      private void CreateFile(string PathFile,string html)
      {
-          using (FileStream fileStream = File.Open(PathFile,FileMode.OpenOrCreate))
+          using (StreamWriter fileStream = new StreamWriter(PathFile))
           {
-               fileStream.Seek(0, SeekOrigin.End);
-               Byte[] conteudo = new UTF8Encoding(true).GetBytes(html);
-               fileStream.WriteAsync(conteudo, 0, conteudo.Length).Wait();
+               fileStream.Write(html);
           }
      }
 
