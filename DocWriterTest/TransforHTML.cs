@@ -10,7 +10,7 @@ namespace DocWriterTest;
 public class TransforHTML
 {
       private string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
-      ExtracaoModeloHTML extracao = new ExtracaoModeloHTML();
+      ExtracaoModelo extracao = new ExtracaoModelo();
       
       [TestMethod]
       public void PreparaAtributo()
@@ -18,7 +18,7 @@ public class TransforHTML
             ModeloHTML  Modelo = extracao.GetMappingModeloHTML("T"); 
             
       
-             var atributos  = extracao.PreparaAtributos("B,I,S",Modelo.Atributos!,Modelo.AtributosDefaut!);
+             var atributos  = extracao.PreparaAtributos("B,I,S",Modelo.AtributosDefaut!);
 
              Assert.AreEqual(atributos, " class=\" B I S\"");
       }
@@ -40,7 +40,7 @@ public class TransforHTML
       [TestMethod]
       public void IndicarIndicadoNaoExiste()
       {
-            extracao = new ExtracaoModeloHTML(new ModeloInput(texto),new ModeloFuncao());
+            extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
             var indicacao =  extracao.AdicionarIndicadorInexistente("XER(B,I,S,C=RED)");
             Assert.AreEqual(indicacao,"XER????");
       }
@@ -49,7 +49,7 @@ public class TransforHTML
       {
             string textoTest = @"H(){s} T(){ P(){ola mundo} S(B,I,S){importante} no sage} IM(S=https://image.webmotors.com.br/_fotos/anunciousados/gigante/2022/202207/20220730/honda-cb-600f-hornet-wmimagem13432887665.jpg?s=fill&w=1920&h=1440&q=75){}"
             +"A(L=./introducao){}";
-            extracao = new ExtracaoModeloHTML(new ModeloInput(textoTest),new ModeloFuncao());
+            extracao = new ExtracaoModelo(new ModeloInput(textoTest),new ModeloFuncao());
             extracao.ExtrairFuncao();
             textoTest = extracao.GetDocumentoFormatado();
       }
@@ -62,8 +62,9 @@ public class TransforHTML
       [TestMethod]
       public void PreparaExtruturaProjeto()
       {
-            string Test = @"ALERT1(){teste de aviso}";
-
+            string Test = @"T(){HTML básico}"+
+            "HTML (Linguagem de Marcação de Hipertexto) é o código que você usa para estruturar uma página"+      
+            "ALERT1(){Meu gatinho é muito mal humorado}";
             EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","html"),Test);
             projeto.PreparaEstruturaProjeto();
             projeto.Run();
