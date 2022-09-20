@@ -9,7 +9,7 @@ namespace DocWriterTest;
 public class SintaxeModel
 {    
     private string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
-    ExtracaoModeloHTML extracao = new ExtracaoModeloHTML();
+    ExtracaoModelo extracao = new ExtracaoModelo();
     [TestMethod]
     public void EncontrarDoisMaths()
     {

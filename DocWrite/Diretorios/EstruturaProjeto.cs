@@ -6,7 +6,7 @@ public class EstruturaProjeto
 {
      private readonly IModeloArquivoProjeto Projeto;
      private readonly string Fogx;
-     private ExtracaoModeloHTML extracao;
+     private ExtracaoModelo extracao;
      public EstruturaProjeto(IModeloArquivoProjeto configProjeto, string fogx){
           this.Fogx = fogx;
           this.Projeto = configProjeto;
@@ -49,13 +49,13 @@ public class EstruturaProjeto
           GravarHTML();
      }
       private void GravarFOGX(){
-          extracao = new ExtracaoModeloHTML(new ModeloInput(this.Fogx),new ModeloFuncao());
+          extracao = new ExtracaoModelo(new ModeloInput(this.Fogx),new ModeloFuncao());
           extracao.ExtrairFuncao();
           CreateFile(Projeto.FOGX,this.Fogx);          
 
      }
      private void GravarHTML(){
-          extracao = new ExtracaoModeloHTML(new ModeloInput(this.Fogx),new ModeloFuncao());
+          extracao = new ExtracaoModelo(new ModeloInput(this.Fogx),new ModeloFuncao());
           extracao.ExtrairFuncao();
           string estrutura = EstruraInicialHTML();
           estrutura = Regex.Replace(estrutura,@"{body}",extracao.GetDocumentoFormatado());

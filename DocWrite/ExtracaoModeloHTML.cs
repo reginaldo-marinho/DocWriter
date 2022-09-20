@@ -5,13 +5,13 @@ using System.Linq;
 using DocWrite.tag;
 
 namespace DocWrite;
-public class ExtracaoModeloHTML:IExtracaoModelo
+public class ExtracaoModelo:IExtracaoModelo
  {
     private string ModeloInput;
     IExpressaoRegular ExpessaoRegular;
     private Regex rx;
-    public ExtracaoModeloHTML(){}  
-    public ExtracaoModeloHTML(IModeloInput modeloInput,IExpressaoRegular expessaoRegular){
+    public ExtracaoModelo(){}  
+    public ExtracaoModelo(IModeloInput modeloInput,IExpressaoRegular expessaoRegular){
         this.ExpessaoRegular = expessaoRegular;
         this.ModeloInput = modeloInput.GetModelo();
     }
@@ -55,7 +55,7 @@ public class ExtracaoModeloHTML:IExtracaoModelo
         string atributos = "";
         string HTML = "";
 
-        atributos = PreparaAtributos(groups[3].Value,mappingModelo.Atributos!,mappingModelo.AtributosDefaut!);
+        atributos = PreparaAtributos(groups[3].Value!,mappingModelo.AtributosDefaut!);
 
         if(atributos != "")
             HTML = $"<{mappingModelo?.TagHtml} {atributos}>{groups[4].Value}</{mappingModelo?.TagHtml}>";
@@ -64,68 +64,7 @@ public class ExtracaoModeloHTML:IExtracaoModelo
 
         ReplaceModelo(groups[0].Value,HTML,ref texto);   
         
-        return "";
-        
-    }
-    public string PreparaAtributos(string modeloAtributos, string[] atributos,string[] atributosDefaut)
-    {
-
-        string AtributosHTML = "";
-        string AtributoClass = "";
-        
-        if (atributosDefaut is not null)
-        {
-            foreach (var defaut in atributosDefaut)
-            {
-                AtributosHTML += PreparaAtributos(defaut,null,null);   
-            }
-        }
-        foreach(string atr in modeloAtributos.Split(","))
-        {
-            if (atr == "")
-            {
-                break;
-            }
-            string identificador ="";
-            string conteudo = "";
-
-            Int32 posiscao = atr.IndexOf("=");
-
-            if ( posiscao > -1)
-            {
-                identificador = atr.Substring(0,posiscao);
-                posiscao+=1;
-                conteudo = atr.Substring(posiscao);
-            }
-            else
-            {
-                identificador = atr;
-            }
-            // Verifica se o atributo passado no modelo de função existe na sua lista de atributos permitidos 
-
-
-            ModeloAtributo atributoHTML =  GetMappingModeloAtributo(identificador);
-
-            if (atributoHTML is not null)
-            {
-                if (atributoHTML.IsClass)
-                {
-                    AtributoClass += $"{atributoHTML.Identificador} ";      
-                }
-                if (!atributoHTML.IsClass && conteudo == "")
-                {
-                    AtributosHTML+= $" {atributoHTML.AtributoHtml}";
-                }
-                if (!atributoHTML.IsClass && conteudo != "")
-                {
-                    AtributosHTML+= $" {atributoHTML.AtributoHtml}=\"{conteudo}\"";
-                }        
-            }
-        }
-        if(AtributoClass != ""){
-            return AtributosHTML+= $" class=\"{AtributoClass}\"";
-        }
-        return AtributosHTML;
+        return "";   
     }
     public void ReplaceModelo(string Mathfuncao,string html,ref string modelo){
         modelo = modelo.Replace(Mathfuncao,html);
@@ -155,6 +94,84 @@ public class ExtracaoModeloHTML:IExtracaoModelo
                 select modeloCSS
              ).FirstOrDefault()!;            
         }
+    }
+
+    public Atributo GetAtributo(string atributo){
+        
+        string AtributosHTML = "";
+        string AtributoClass = "";
+
+        if (atributo is not null)
+        {
+            string identificador ="";
+            string conteudo = "";
+
+            Int32 posiscao = atributo.IndexOf("=");
+
+            if ( posiscao > -1)
+            {
+                identificador = atributo.Substring(0,posiscao);
+                posiscao+=1;
+                conteudo = atributo.Substring(posiscao);
+            }
+            else
+            {
+                identificador = atributo;
+            }
+
+            ModeloAtributo atributoHTML =  GetMappingModeloAtributo(identificador);
+
+            if (atributoHTML is not null)
+            {
+                if (atributoHTML.IsClass)
+                {
+                    AtributoClass += $"{atributoHTML.Identificador} ";    
+                }
+                if (!atributoHTML.IsClass && conteudo == "")
+                {
+                    AtributosHTML+= $" {atributoHTML.AtributoHtml}";
+                }
+                if (!atributoHTML.IsClass && conteudo != "")
+                {
+                    AtributosHTML+= $" {atributoHTML.AtributoHtml}=\"{conteudo}\""; 
+                }        
+            }
+            
+        }
+        return new Atributo {AtributosHTML = AtributosHTML, AtributoClass = AtributoClass};
+    }
+    public string PreparaAtributos(string modeloAtributos, string[] atributosDefaut)
+    {
+              
+        Atributo Atributo = new Atributo(){
+                AtributoClass = "",
+                AtributosHTML = ""
+        };
+        Atributo ReturnAtributo;
+
+        if (atributosDefaut is not null)
+        {
+            foreach (var defaut in atributosDefaut)
+            {
+                ReturnAtributo =  GetAtributo(defaut);   
+                Atributo.AtributoClass+= $" {ReturnAtributo.AtributoClass}"; 
+                Atributo.AtributosHTML+= $" {ReturnAtributo.AtributosHTML}"; 
+            }
+        }
+        foreach(string atr in modeloAtributos.Split(","))
+        {
+            if (atr == "")
+            {
+                break;
+            }
+            ReturnAtributo =  GetAtributo(atr);   
+            Atributo.AtributoClass+= $" {ReturnAtributo.AtributoClass}"; 
+            Atributo.AtributosHTML+= $" {ReturnAtributo.AtributosHTML}"; 
+        }
+        if(Atributo.AtributoClass != ""){
+            return Atributo.AtributosHTML+= $" class=\"{Atributo.AtributoClass}\"";
+        }
+        return Atributo.AtributosHTML;
     }
  }
  
