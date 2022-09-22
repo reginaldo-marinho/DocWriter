@@ -7,4 +7,4 @@ docs:{pagina}/docs
 html:{pagina}/{nome}.html
 fogx:{pagina}/{nome}.fogx
 css:{pagina}/{nome}.css
-
+tamplate:{tamplete}

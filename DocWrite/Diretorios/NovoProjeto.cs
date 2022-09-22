@@ -4,16 +4,11 @@ using System.IO;
 using System.Text;
 public class NovoProjeto
 {
-     public void CriarNovoProjeto(string projeto, string path){
+     public static void CriarNovoProjeto(string path,string projeto,string tamplete){
 
-          CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}");
-          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}.conf");
-          EscreverArquivo.CreateFile($"{path}/{projeto}.conf",ConfiguracaoProjeto(projeto,path));
-     }
-     private string ConfiguracaoProjeto(string projeto, string path){
           StringBuilder build = new StringBuilder();
-          build.AppendFormat("proj:{0}",projeto);
-          build.AppendFormat("endpoint:{0}",path);
+          build.AppendLine($"proj:{projeto}");
+          build.AppendLine($"endpoint:{path}");
           build.AppendLine("livro:{endpoint}/{proj}");
           build.AppendLine("pagina:{livro}/{pagina}");
           build.AppendLine("assets:{pagina}/assets");
@@ -21,6 +16,10 @@ public class NovoProjeto
           build.AppendLine("html:{pagina}/{nome}.html");
           build.AppendLine("fogx:{pagina}/{nome}.fogx");
           build.AppendLine("css:{pagina}/{nome}.css");
-          return build.ToString();
+          build.AppendLine($"tamplate:{tamplete}");
+
+          CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}".Replace("//","/"));
+          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/{projeto}.conf".Replace("//","/"));
+          EscreverArquivo.CreateFile($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());
      }
 }
