@@ -9,13 +9,11 @@ namespace DocWriterTest;
 public class SintaxeModel
 {    
     private string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
-    ExtracaoModelo extracao;
+    ExtracaoModelo? extracao;
     [TestMethod]
     public void EncontrarDoisMaths()
     {
         extracao = new ExtracaoModelo(new ModeloInput(texto),new ModeloFuncao());
-        // 1 => H(BIS,C=RED){ sage X3}
-        // 2 => S(BIS,){importante}
         MatchCollection maths = extracao.GetMatchCollection(new ModeloFuncao(),ref texto);
         Assert.AreEqual(maths.Count,2);
     }

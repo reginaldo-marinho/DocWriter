@@ -10,7 +10,7 @@ namespace DocWriterTest;
 public class TransforHTML
 {
       string texto = @"H(B,I,S,C=RED){ sage X3} T(){Tudo que e S(B,I,S){importante} para voce aplicar no sage}";
-      ExtracaoModelo extracao;
+      ExtracaoModelo? extracao;
       
       [TestMethod]
       public void PreparaAtributo()
@@ -59,7 +59,7 @@ public class TransforHTML
       [TestMethod]
       public void CheckDiretorio()
       {
-            var teste =  ArquivoConfiguracaoFconf.CheckDiretorio("sage","introducao");
+            var teste =  ArquivoConfiguracaoFconf.CheckDiretorio("sage","int roducao");
       }
 
       [TestMethod]
@@ -108,9 +108,31 @@ public class TransforHTML
             "End Sub"+
             "End Module"+
             "}"+
-            "VIDEO(SR=https://archive.org/download/Popeye_forPresident/Popeye_forPresident_512kb.mp4){}";
-
-            
+            "VIDEO(SR=https://archive.org/download/Popeye_forPresident/Popeye_forPresident_512kb.mp4){}"+
+            "TT(){Sintaxe Doc Write}"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }"+
+            "P(){--run livro pagina }";
 
             EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","animais"),Test);
             projeto.Run();

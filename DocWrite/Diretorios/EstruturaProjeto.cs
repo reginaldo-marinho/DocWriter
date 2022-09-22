@@ -13,32 +13,18 @@ public class EstruturaProjeto
           this.Projeto = configProjeto;
      } 
      private void  ChecaPreparaEstruturaProjeto(){
-          ChecarCriarDiretorio(this.Projeto.Livro);
-          ChecarCriarDiretorio(this.Projeto.Pagina);
-          ChecarCriarArquivo(this.Projeto.CSS);
-          ChecarCriarArquivo(this.Projeto.HTML);
-          ChecarCriarArquivo(this.Projeto.FOGX);
-          ChecarCriarDiretorio(this.Projeto.Assets);
-          ChecarCriarDiretorio(this.Projeto.Docs);
+          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Livro);
+          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Pagina);
+          CriacaoArquivo.ChecarCriarArquivo(this.Projeto.CSS);
+          CriacaoArquivo.ChecarCriarArquivo(this.Projeto.HTML);
+          CriacaoArquivo.ChecarCriarArquivo(this.Projeto.FOGX);
+          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Assets);
+          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Docs);
      }
      private  void ChecarCriarArquivoHTML(string path){
-          ChecarCriarArquivo(path);
+          CriacaoArquivo.ChecarCriarArquivo(path);
      }
-     private void ChecarCriarArquivo(string path)
-     {
-          if (!File.Exists(path))
-          {
-               File.Create(path);
-          }
-
-     }
-     private void ChecarCriarDiretorio(string path)
-     {
-          if (!Directory.Exists(path))
-          {
-               Directory.CreateDirectory(path);
-          }
-     }
+    
      public void Run(){
           ChecaPreparaEstruturaProjeto();
           GravarFOGX();
@@ -47,7 +33,7 @@ public class EstruturaProjeto
       private void GravarFOGX(){
           extracao = new ExtracaoModelo(new ModeloInput(this.Fogx),new ModeloFuncao());
           extracao.ExtrairFuncao();
-          CreateFile(Projeto.FOGX,this.Fogx);          
+          EscreverArquivo.CreateFile(Projeto.FOGX,this.Fogx);          
 
      }
      private void GravarHTML(){
@@ -55,15 +41,8 @@ public class EstruturaProjeto
           extracao.ExtrairFuncao();
           string estrutura = EstruraInicialHTML();
           estrutura = Regex.Replace(estrutura,@"{body}",extracao.GetDocumentoFormatado());
-          CreateFile(Projeto.HTML,estrutura);
+          EscreverArquivo.CreateFile(Projeto.HTML,estrutura);
 
-     }
-     private void CreateFile(string PathFile,string html)
-     {
-          using (StreamWriter fileStream = new StreamWriter(PathFile))
-          {
-               fileStream.Write(html);
-          }
      }
 
      private string EstruraInicialHTML(){
