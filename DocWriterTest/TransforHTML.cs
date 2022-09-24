@@ -110,31 +110,9 @@ public class TransforHTML
             "}"+
             "VIDEO(SR=https://archive.org/download/Popeye_forPresident/Popeye_forPresident_512kb.mp4){}"+
             "TT(){Sintaxe Doc Write}"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
-            "P(){--run livro pagina }"+
             "P(){--run livro pagina }";
 
-            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","animais"),Test);
+            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","index"),Test);
             projeto.Run();
       }
 }

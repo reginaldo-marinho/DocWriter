@@ -4,8 +4,15 @@ using System.IO;
 using System.Text;
 public class NovoProjeto
 {
+     private static void GuardaLocalidadeProjeto(string path,string projeto){
+          using (StreamReader rdBase = new StreamReader($"{Directory.GetCurrentDirectory()}/base.conf")){
+               var arquivoBaseProjetos = $"{rdBase.ReadLine()!.Replace("base:/","")}/BaseDocWrite/projects.conf".Replace("//","/"); 
+               EscreverArquivo.Escrever(arquivoBaseProjetos,$"{projeto}:{path}");
+          }
+     }
      public static void CriarNovoProjeto(string path,string projeto,string tamplete){
 
+          GuardaLocalidadeProjeto(path,projeto);
           StringBuilder build = new StringBuilder();
           build.AppendLine($"proj:{projeto}");
           build.AppendLine($"endpoint:{path}");
@@ -20,6 +27,6 @@ public class NovoProjeto
 
           CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}".Replace("//","/"));
           CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/{projeto}.conf".Replace("//","/"));
-          EscreverArquivo.CreateFile($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());
+          EscreverArquivo.Escrever($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());
      }
 }

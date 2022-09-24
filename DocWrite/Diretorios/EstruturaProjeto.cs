@@ -33,7 +33,7 @@ public class EstruturaProjeto
       private void GravarFOGX(){
           extracao = new ExtracaoModelo(new ModeloInput(this.Fogx),new ModeloFuncao());
           extracao.ExtrairFuncao();
-          EscreverArquivo.CreateFile(Projeto.FOGX,this.Fogx);          
+          EscreverArquivo.Escrever(Projeto.FOGX,this.Fogx);          
 
      }
      private void GravarHTML(){
@@ -41,7 +41,7 @@ public class EstruturaProjeto
           extracao.ExtrairFuncao();
           string estrutura = EstruraInicialHTML();
           estrutura = Regex.Replace(estrutura,@"{body}",extracao.GetDocumentoFormatado());
-          EscreverArquivo.CreateFile(Projeto.HTML,estrutura);
+          EscreverArquivo.Escrever(Projeto.HTML,estrutura);
 
      }
 

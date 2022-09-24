@@ -4,11 +4,11 @@ using System.IO;
 using System.Text;
 public class EscreverArquivo
 {
-     public static void CreateFile(string PathFile,string html)
+     public static void Escrever(string PathFile,string conteudo)
      {
           using (StreamWriter fileStream = new StreamWriter(PathFile))
           {
-               fileStream.Write(html);
+               fileStream.Write(conteudo);
           }
      }
 }

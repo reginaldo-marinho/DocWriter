@@ -11,25 +11,48 @@ namespace DocWriteConsole
             var rootCommand = new RootCommand();
             var docCommmand = new Command("doc", "Commando inicial para todos dos outros comandos");
             rootCommand.Add(docCommmand);
+
+            var docConfCommmand =  new Command("conf", "configuração do DocWrite"); // doc --base-path
+
+            docCommmand.Add(docConfCommmand);
+             var basePath = new Option<string>(
+                name:"--base-path"
+            );
+            docConfCommmand.Add(basePath); 
+            docConfCommmand.SetHandler(basePath => {
+                ConfiguracaoDiretorioBase.ConfigurarDiretorioBase(basePath);
+            },basePath);
+            
             var docNewCommmand =  new Command("new", "Indica a criação de um novo projeto"); // doc new
+            docNewCommmand.AddAlias("-n");
+
             docCommmand.Add(docNewCommmand);
-            var docDelCommmand =  new Command("remove", "Remove um projeto criado"); // doc remove
-            docCommmand.Add(docDelCommmand); // doc new --path
+            var TamplateArgument = new Argument<string>
+            (name: "tamplate",
+                description: "Define o tipo do tamplete do projeto"
+            ).FromAmong(
+                "documentation",
+                "tutorial",
+                "list"
+            );
             var path = new Option<string>(
-                name: "--path",
-                description: "recebe o caminho dos projetos desejados"
-                
-            ){IsRequired = true};
+                name:"--path"
+            ){IsRequired =true};
+            var nameProject = new Option<string>(
+                name:"--name"
+            ){IsRequired =true};
+
+            docNewCommmand.Add(TamplateArgument);
             docNewCommmand.Add(path);
-            var project = new Option<string>(
-                name: "--project",
-                description: "recebe o nome do projeto"
-            ){IsRequired = true};
-            docNewCommmand.Add(project);
+            docNewCommmand.Add(nameProject);
 
-            string[] argsTest = {"doc","new","--path","scscscscscsc"};
-            rootCommand.Invoke(argsTest);
+            docNewCommmand.SetHandler((path,nomeProjeto,tamplate) => {
+                NovoProjeto.CriarNovoProjeto(path,nomeProjeto,tamplate);
+            },path,nameProject,TamplateArgument);
+ // string[] args2 = {"doc","new","documentation","--path=\"/home/reginaldo/Desenvolvimento\"","--name=\"docwrite\""};
+
+            
+            rootCommand.Invoke(args);
         }
-
     }
 }
