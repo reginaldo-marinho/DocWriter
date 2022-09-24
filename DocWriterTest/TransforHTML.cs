@@ -63,58 +63,6 @@ public class TransforHTML
       }
 
       [TestMethod]
-      public void PreparaExtruturaProjeto()
-      {
-            string Test = @"T(){HTML básico}"+
-            "HTML (Linguagem de Marcação de Hipertexto) é o código que você usa para estruturar uma página"+      
-            "ALERT1(){Meu gatinho é muito mal humorado}"+
-            "TT(){animais}"+
-            "LNO(){"+
-                  "LI(){macaco}"+
-                  "LI(){cachorro}"+
-                  "LI(){lebre}"+
-                  "LI(){tartatura}"+
-                  "LI(){gato}"+
-            "}"+
-            "TB(){"+
-                  "TBR(){"+
-                        "TBH(){nome}"+
-                        "TBH(){idade}"+
-                        "TBH(){sexo}"+
-                  "}"+
-                  "TBR(){"+
-                        "TBD(){reginado}"+
-                        "TBD(){25}"+
-                        "TBD(){M}"+
-                  "}"+
-            "}"+
-            "&#128512; &#128512; &#128512; &#128512; &#128512; &#128512; &#128512;"+
-            "IM(SR=https://raw.githubusercontent.com/mdn/beginner-html-site/gh-pages/images/firefox-icon.png){}"+
-            "CODE(){"+
-            "Module Module1"+
-            "Sub Main()"+
-                  "While True"+
-                        "Read value."+
-                        "Dim s As String = Console.ReadLine()\n"+
-                        " Test the value.\n"+
-                        "If s = \"1\" Then"+
-                        "Console.WriteLine(\"One\")\n"+
-                        "ElseIf s = \"2\" Then\n"+
-                        "Console.WriteLine(\"Two\")\n"+
-                        "End If\n"+
-                        "Write the value.\n"+
-                        "Console.WriteLine(\"You typed a\" + s)\n"+
-                  "End While"+
-            "End Sub"+
-            "End Module"+
-            "}"+
-            "VIDEO(SR=https://archive.org/download/Popeye_forPresident/Popeye_forPresident_512kb.mp4){}"+
-            "TT(){Sintaxe Doc Write}"+
-            "P(){--run livro pagina }";
-
-      }
-
-      [TestMethod]
       public void CriarNovoProjeto(){
             NovoProjeto.CriarNovoProjeto("/home/reginaldo/Desenvolvimento","docwrite2","documentation");
       }

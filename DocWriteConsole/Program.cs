@@ -69,9 +69,9 @@ namespace DocWriteConsole
 
             var docRunCommmand =  new Command("run", "Cria o documento Html");
             docRunCommmand.AddAlias("r");
-            docProjectCommmand.Add(docRunCommmand);
+            docCommmand.Add(docRunCommmand);
             docRunCommmand.Add(ProjectArgument);
-            docAddCommmand.Add(PaginaArgument);
+            docRunCommmand  .Add(PaginaArgument);
 
             docRunCommmand.SetHandler((projeto,pagina) => {
                 EstruturaProjeto EstruturaProjeto = new EstruturaProjeto(ArquivoConfiguracaoConf.CheckDiretorio(projeto,pagina));
