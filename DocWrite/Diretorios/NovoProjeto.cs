@@ -4,15 +4,20 @@ using System.IO;
 using System.Text;
 public class NovoProjeto
 {
-     private static void GuardaLocalidadeProjeto(string path,string projeto){
-          using (StreamReader rdBase = new StreamReader($"{Directory.GetCurrentDirectory()}/base.conf")){
-               var arquivoBaseProjetos = $"{rdBase.ReadLine()!.Replace("base:/","")}/BaseDocWrite/projects.conf".Replace("//","/"); 
-               EscreverArquivo.Escrever(arquivoBaseProjetos,$"{projeto}:{path}");
+     
+     public static void RegistraProjetoNaListaDeProjetos(string path,string projeto){
+          var pathListaProjetos = GetPathBaseConf();
+          EscreverArquivo.AdicionarLinha(pathListaProjetos,$"{projeto}:{path}/{projeto}".Replace("//","/"));
+     }
+     public static string GetPathBaseConf(){
+          //using (StreamReader rdBase = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWriteConsole/bin/Debug/net6.0/base.conf"))
+          using (StreamReader rdBase = new StreamReader($"{Directory.GetCurrentDirectory()}/base.conf"))
+          {
+               return $"{rdBase.ReadLine()!.Replace("path:","")}/ProjectsDocWrite/projects.conf".Replace("//","/"); 
           }
      }
      public static void CriarNovoProjeto(string path,string projeto,string tamplete){
-
-          GuardaLocalidadeProjeto(path,projeto);
+          RegistraProjetoNaListaDeProjetos(path,projeto);
           StringBuilder build = new StringBuilder();
           build.AppendLine($"proj:{projeto}");
           build.AppendLine($"endpoint:{path}");
@@ -24,7 +29,6 @@ public class NovoProjeto
           build.AppendLine("fogx:{pagina}/{nome}.fogx");
           build.AppendLine("css:{pagina}/{nome}.css");
           build.AppendLine($"tamplate:{tamplete}");
-
           CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}".Replace("//","/"));
           CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/{projeto}.conf".Replace("//","/"));
           EscreverArquivo.Escrever($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());

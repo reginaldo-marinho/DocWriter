@@ -8,11 +8,10 @@ public class EstruturaProjeto
      private readonly IModeloArquivoProjeto Projeto;
      private readonly string Fogx;
      private ExtracaoModelo extracao;
-     public EstruturaProjeto(IModeloArquivoProjeto configProjeto, string fogx){
-          this.Fogx = fogx;
-          this.Projeto = configProjeto;
+     public EstruturaProjeto(IModeloArquivoProjeto configProjeto){
+            this.Projeto = configProjeto;
      } 
-     private void  ChecaPreparaEstruturaProjeto(){
+     public void  ChecaPreparaEstruturaProjeto(){
           CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Livro);
           CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Pagina);
           CriacaoArquivo.ChecarCriarArquivo(this.Projeto.CSS);
@@ -26,29 +25,19 @@ public class EstruturaProjeto
      }
     
      public void Run(){
-          ChecaPreparaEstruturaProjeto();
-          GravarFOGX();
           GravarHTML();
      }
-      private void GravarFOGX(){
-          extracao = new ExtracaoModelo(new ModeloInput(this.Fogx),new ModeloFuncao());
-          extracao.ExtrairFuncao();
-          EscreverArquivo.Escrever(Projeto.FOGX,this.Fogx);          
-
-     }
      private void GravarHTML(){
-          extracao = new ExtracaoModelo(new ModeloInput(this.Fogx),new ModeloFuncao());
+          extracao = new ExtracaoModelo(new ModeloInput(LerTodoArquivo.LerTudo(Projeto.FOGX)),new ModeloFuncao());
           extracao.ExtrairFuncao();
           string estrutura = EstruraInicialHTML();
           estrutura = Regex.Replace(estrutura,@"{body}",extracao.GetDocumentoFormatado());
           EscreverArquivo.Escrever(Projeto.HTML,estrutura);
-
      }
 
      private string EstruraInicialHTML(){
 
           StringBuilder Estrutura = new StringBuilder();
-
           Estrutura.AppendLine("<!DOCTYPE html>");
           Estrutura.AppendLine("<html>");
           Estrutura.AppendLine("   <head>");

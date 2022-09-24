@@ -59,7 +59,7 @@ public class TransforHTML
       [TestMethod]
       public void CheckDiretorio()
       {
-            var teste =  ArquivoConfiguracaoFconf.CheckDiretorio("sage","int roducao");
+            var teste =  ArquivoConfiguracaoConf.CheckDiretorio("sage","int roducao");
       }
 
       [TestMethod]
@@ -112,7 +112,17 @@ public class TransforHTML
             "TT(){Sintaxe Doc Write}"+
             "P(){--run livro pagina }";
 
-            EstruturaProjeto projeto = new  EstruturaProjeto(ArquivoConfiguracaoFconf.CheckDiretorio("sage","index"),Test);
-            projeto.Run();
       }
+
+      [TestMethod]
+      public void CriarNovoProjeto(){
+            NovoProjeto.CriarNovoProjeto("/home/reginaldo/Desenvolvimento","docwrite2","documentation");
+      }
+
+       [TestMethod]
+      public void ObterPathDoProjeto(){
+            var teste  = ArquivoConfiguracaoConf.PathDoProjeto("sage");
+      }
+
+      
 }

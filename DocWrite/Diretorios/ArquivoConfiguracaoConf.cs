@@ -3,13 +3,28 @@ namespace DocWrite.Diretorios;
 using System.Text.RegularExpressions;
 using System.IO;
 
-public class ArquivoConfiguracaoFconf
+public class ArquivoConfiguracaoConf
 {
-    public static IModeloArquivoProjeto CheckDiretorio(string projeto,string nomePagina)
+     public static string PathDoProjeto(string projeto){
+          
+          using (StreamReader sr = new StreamReader(NovoProjeto.GetPathBaseConf()))
+          {
+               string linhaEmLeitura = ""; 
+               Regex rg = new  Regex(@"^.+:",RegexOptions.Compiled);
+               while ((linhaEmLeitura = sr.ReadLine()!) != null)
+               {
+                    if (rg.Match(linhaEmLeitura).Value == $"{projeto}:")
+                    {
+                         return Regex.Replace(linhaEmLeitura,@"^.+:","");
+                    }      
+               }
+               return "";
+          }
+     } 
+     public static IModeloArquivoProjeto CheckDiretorio(string projeto,string nomePagina)
      {
-          var conf = @"/home/reginaldo/Desenvolvimento/DocWriter/fconf.fconf";
           IModeloArquivoProjeto modeloArquivo = new ModeloArquivoProjeto();
-          using (StreamReader sr = new StreamReader(conf))
+          using (StreamReader sr = new StreamReader($"{PathDoProjeto(projeto)}/{projeto}.conf".Replace("//","/")))
           {
                Regex rg = new  Regex(@"^[A-Z-a-z-0-9]+",RegexOptions.Compiled);
                byte linhaProjeto = 0;
@@ -75,7 +90,7 @@ public class ArquivoConfiguracaoFconf
                                    modeloArquivo.CSS = modeloArquivo.CSS
                                    .Replace("{pagina}",modeloArquivo.Pagina)
                                    .Replace("{nome}",nomePagina); 
-                                    modeloArquivo.FOGX = modeloArquivo.FOGX
+                                   modeloArquivo.FOGX = modeloArquivo.FOGX
                                    .Replace("{pagina}",modeloArquivo.Pagina)
                                    .Replace("{nome}",nomePagina); 
                               }

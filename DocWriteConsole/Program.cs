@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
-
 using DocWrite;
+using DocWrite.Diretorios;
 
 namespace DocWriteConsole
 {
@@ -49,8 +49,35 @@ namespace DocWriteConsole
             docNewCommmand.SetHandler((path,nomeProjeto,tamplate) => {
                 NovoProjeto.CriarNovoProjeto(path,nomeProjeto,tamplate);
             },path,nameProject,TamplateArgument);
- // string[] args2 = {"doc","new","documentation","--path=\"/home/reginaldo/Desenvolvimento\"","--name=\"docwrite\""};
 
+            var docProjectCommmand =  new Command("project", "indica um  projeto já criado"); 
+            docProjectCommmand.AddAlias("p");
+            docCommmand.Add(docProjectCommmand);
+            var ProjectArgument = new Argument<string> (name: "nome-projeto",description: "nome do projeto");
+            docProjectCommmand.Add(ProjectArgument);
+
+            var docAddCommmand =  new Command("add", "adicionada  uma  no pagina no projeto");
+            docAddCommmand.AddAlias("a");
+            docProjectCommmand.Add(docAddCommmand); 
+
+            var PaginaArgument = new Argument<string> (name: "pagina",description: "Pagina do projeto"); 
+            docAddCommmand.Add(PaginaArgument);
+            docAddCommmand.SetHandler((projeto,pagina) => {
+                EstruturaProjeto EstruturaProjeto = new EstruturaProjeto(ArquivoConfiguracaoConf.CheckDiretorio(projeto,pagina));
+                EstruturaProjeto.ChecaPreparaEstruturaProjeto();
+            },ProjectArgument,PaginaArgument);
+
+            var docRunCommmand =  new Command("run", "Cria o documento Html");
+            docRunCommmand.AddAlias("r");
+            docProjectCommmand.Add(docRunCommmand);
+            docRunCommmand.Add(ProjectArgument);
+            docAddCommmand.Add(PaginaArgument);
+
+            docRunCommmand.SetHandler((projeto,pagina) => {
+                EstruturaProjeto EstruturaProjeto = new EstruturaProjeto(ArquivoConfiguracaoConf.CheckDiretorio(projeto,pagina));
+                EstruturaProjeto.ChecaPreparaEstruturaProjeto();
+                EstruturaProjeto.Run();
+            },ProjectArgument,PaginaArgument);
             
             rootCommand.Invoke(args);
         }
