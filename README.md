@@ -99,4 +99,7 @@ Em resumo, e estrutura atual do projeto estaria desse modo:
 ![image](https://user-images.githubusercontent.com/60780631/191051578-fd854f3b-9e13-4067-985c-a9d62b0810a4.png)
 
 # A CLI do DocWrite
-Para configuramos, criarmos e/ou removemos artefatos do DocWrite, utilizamos a sua CLI.
+Todos os comandos Docwrite são acionados a partir da sua CLI.
+Seus comandos afetam tanto as configurações do Docwrite, quando  os projetos que foram criados a partir dele.
+
+Nós
