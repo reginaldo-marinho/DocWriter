@@ -100,6 +100,8 @@ Em resumo, e estrutura atual do projeto estaria desse modo:
 
 # A CLI do DocWrite
 Todos os comandos Docwrite são acionados a partir da sua CLI.
-Seus comandos afetam tanto as configurações do Docwrite, quando  os projetos que foram criados a partir dele.
 
-Nós
+Seus comandos afetam tanto as configurações do Docwrite, quanto os projetos criados.
+
+
+## O Comando Doc
