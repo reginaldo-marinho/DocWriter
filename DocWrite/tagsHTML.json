@@ -61,6 +61,16 @@
         "Atributos":[]
     },
     {
+        "Identificador":"DT",
+        "TagHtml":"details",
+        "Atributos":[]
+    },
+    {
+        "Identificador":"SM",
+        "TagHtml":"summary",
+        "Atributos":[]
+    },
+    {
         "Identificador":"TB",
         "TagHtml":"table",
         "Atributos":[]

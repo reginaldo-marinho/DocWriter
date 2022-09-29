@@ -12,13 +12,15 @@ public class EstruturaProjeto
             this.Projeto = configProjeto;
      } 
      public void  ChecaPreparaEstruturaProjeto(){
-          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Livro);
-          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Pagina);
-          CriacaoArquivo.ChecarCriarArquivo(this.Projeto.CSS);
-          CriacaoArquivo.ChecarCriarArquivo(this.Projeto.HTML);
-          CriacaoArquivo.ChecarCriarArquivo(this.Projeto.FOGX);
-          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Assets);
-          CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Docs);
+
+          Regex rg = new Regex (@"\/lc$",RegexOptions.Compiled);
+          if(!rg.Match(this.Projeto.Pagina).Value.Equals("/lc")){
+               CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Livro);
+               CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Pagina);
+               CriacaoArquivo.ChecarCriarArquivo(this.Projeto.HTML);
+               CriacaoArquivo.ChecarCriarArquivo(this.Projeto.FOGX);
+               CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Assets);
+          }
      }
      private  void ChecarCriarArquivoHTML(string path){
           CriacaoArquivo.ChecarCriarArquivo(path);
@@ -30,27 +32,6 @@ public class EstruturaProjeto
      private void GravarHTML(){
           extracao = new ExtracaoModelo(new ModeloInput(LerTodoArquivo.LerTudo(Projeto.FOGX)),new ModeloFuncao());
           extracao.ExtrairFuncao();
-          string estrutura = EstruraInicialHTML();
-          estrutura = Regex.Replace(estrutura,@"{body}",extracao.GetDocumentoFormatado());
-          EscreverArquivo.Escrever(Projeto.HTML,estrutura);
+          EscreverArquivo.Escrever(Projeto.HTML,extracao.GetDocumentoFormatado());
      }
-
-     private string EstruraInicialHTML(){
-
-          StringBuilder Estrutura = new StringBuilder();
-          Estrutura.AppendLine("<!DOCTYPE html>");
-          Estrutura.AppendLine("<html>");
-          Estrutura.AppendLine("   <head>");
-          Estrutura.AppendLine("        <link rel=\"stylesheet\" type=\"text/css\" href=\"/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/style.css\">");
-          Estrutura.AppendLine("        <title> {title} </title>");
-          Estrutura.AppendLine(    "</head>");
-          Estrutura.AppendLine("   <body>");
-          Estrutura.AppendLine("   <div class=\"container\">");
-          Estrutura.AppendLine("        {body}");
-          Estrutura.AppendLine("   <div>");
-          Estrutura.AppendLine("   </body>");
-          Estrutura.AppendLine("</html>");
-
-          return Estrutura.ToString();
-     }  
 }

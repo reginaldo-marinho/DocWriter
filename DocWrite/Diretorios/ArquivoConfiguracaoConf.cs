@@ -58,20 +58,14 @@ public class ArquivoConfiguracaoConf
                               case "assets":
                                    modeloArquivo.Assets = ConteudoModeloConfiguracao;
                                    break;
-                              case "docs":
-                                   modeloArquivo.Docs = ConteudoModeloConfiguracao;
-                                   break; 
                               case "html":
                                    modeloArquivo.HTML = ConteudoModeloConfiguracao;
-                                   break;
-                              case "css":
-                                   modeloArquivo.CSS = ConteudoModeloConfiguracao;
                                    break;
                               case "fogx":
                                    modeloArquivo.FOGX = ConteudoModeloConfiguracao;
                                    break;
                          }
-                         if(linhaProjeto == 9){
+                         if(linhaProjeto == 7){
                               if (modeloArquivo  is not null)
                               {
                                    modeloArquivo.Livro = modeloArquivo.Livro
@@ -82,12 +76,7 @@ public class ArquivoConfiguracaoConf
                                    Replace("{pagina}",nomePagina);  
                                    modeloArquivo.Assets = modeloArquivo.Assets
                                    .Replace("{pagina}",modeloArquivo.Pagina); 
-                                   modeloArquivo.Docs = modeloArquivo.Docs
-                                   .Replace("{pagina}",modeloArquivo.Pagina);   
                                    modeloArquivo.HTML = modeloArquivo.HTML
-                                   .Replace("{pagina}",modeloArquivo.Pagina)
-                                   .Replace("{nome}",nomePagina); 
-                                   modeloArquivo.CSS = modeloArquivo.CSS
                                    .Replace("{pagina}",modeloArquivo.Pagina)
                                    .Replace("{nome}",nomePagina); 
                                    modeloArquivo.FOGX = modeloArquivo.FOGX

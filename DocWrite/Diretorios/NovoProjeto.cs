@@ -10,7 +10,6 @@ public class NovoProjeto
           EscreverArquivo.AdicionarLinha(pathListaProjetos,$"{projeto}:{path}/{projeto}".Replace("//","/"));
      }
      public static string GetPathBaseConf(){
-          //using (StreamReader rdBase = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWriteConsole/bin/Debug/net6.0/base.conf"))
           using (StreamReader rdBase = new StreamReader($"{Directory.GetCurrentDirectory()}/base.conf"))
           {
                return $"{rdBase.ReadLine()!.Replace("path:","")}/ProjectsDocWrite/projects.conf".Replace("//","/"); 
@@ -22,15 +21,22 @@ public class NovoProjeto
           build.AppendLine($"proj:{projeto}");
           build.AppendLine($"endpoint:{path}");
           build.AppendLine("livro:{endpoint}/{proj}");
-          build.AppendLine("pagina:{livro}/{pagina}");
-          build.AppendLine("assets:{pagina}/assets");
-          build.AppendLine("docs:{pagina}/docs");
-          build.AppendLine("html:{pagina}/{nome}.html");
-          build.AppendLine("fogx:{pagina}/{nome}.fogx");
-          build.AppendLine("css:{pagina}/{nome}.css");
+          build.AppendLine("pagina:{livro}/pages/{pagina}");
+          build.AppendLine("assets:/pages/{pagina}/assets");
+          build.AppendLine("html:/pages/{pagina}/{nome}.html");
+          build.AppendLine("fogx:/pages/{pagina}/{nome}.fogx");
           build.AppendLine($"tamplate:{tamplete}");
           CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}".Replace("//","/"));
           CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/{projeto}.conf".Replace("//","/"));
           EscreverArquivo.Escrever($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());
+          CriarContentsDefult(path,projeto);
+     }
+     private static void CriarContentsDefult(string path,string projeto){
+          CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}/pages".Replace("//","/"));
+          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/index.html".Replace("//","/"));
+          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/style.css".Replace("//","/"));
+          CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}/lc".Replace("//","/"));
+          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/lc/lc.html".Replace("//","/"));
+          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/lc/lc.fogx".Replace("//","/"));
      }
 }

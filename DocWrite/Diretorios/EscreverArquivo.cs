@@ -11,7 +11,7 @@ public class EscreverArquivo
      {
           try
           {
-               using (FileStream fs = new FileStream(PathFile, FileMode.OpenOrCreate))
+               using (FileStream fs = new FileStream(PathFile, FileMode.Create))
                {         
                     byte[] info = new UTF8Encoding(false).GetBytes(conteudo);
                     fs.Write(info, 0, info.Length);

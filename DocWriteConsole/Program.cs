@@ -9,14 +9,14 @@ namespace DocWriteConsole
         static void Main(string[] args)
         {
             var rootCommand = new RootCommand();
-            var docCommmand = new Command("doc", "Commando inicial para todos dos outros comandos");
+            var docCommmand = new Command("doc", "Comando inicial para todos dos outros comandos");
             rootCommand.Add(docCommmand);
 
-            var docConfCommmand =  new Command("conf", "configuração do DocWrite"); // doc --base-path
-
+            var docConfCommmand =  new Command("conf", "configuração"); 
             docCommmand.Add(docConfCommmand);
-             var basePath = new Option<string>(
-                name:"--base-path"
+            var basePath = new Option<string>(
+                name:"--base-path",
+                description:"localização do arquivo de configuração"
             );
             docConfCommmand.Add(basePath); 
             docConfCommmand.SetHandler(basePath => {
