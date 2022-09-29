@@ -98,3 +98,45 @@ Em resumo, e estrutura atual do projeto estaria desse modo:
 
 ![image](https://user-images.githubusercontent.com/60780631/191051578-fd854f3b-9e13-4067-985c-a9d62b0810a4.png)
 
+# A CLI do DocWrite
+Todos os comandos Docwrite são acionados a partir da sua CLI.
+
+Seus comandos afetam tanto as configurações do Docwrite, quanto os projetos criados.
+
+
+## O Comando doc
+Esse comando é o comando principal da CLI,  é com ele que damos inicio a todos os outros comandos.
+```
+    doc
+```
+## O Comando conf
+O comando conf é a base para todas as confirurações da aplicação. As configurações fepletem tanto na confiduração do programa, quanto nas configurações dos projetos criados.
+```
+    doc conf
+```
+### Opções Para o Comando conf
+
+#### --base-path
+Esse comando permite que você indique o local em que o arquivo de configuração base do docwrite sejá criado.
+```
+    doc conf --base-path=".../.../..."
+```
+
+## O Comando new ou -n
+Indica a criação de um novo projeto(livro)
+
+### Criando um novo projeto 
+A sintaxe para criação de um novo projeto é: **doc new "nome do tamplate" path="local onde o projeto será criado" --name"="nome do projeto"**
+
+Importante: "nome do tamplate" é o tipo da estrutura HTML que terá o projeto, hoje existem três opções que são  "documentation","tutorial" e "list".
+
+Exemplo Real:
+```
+    doc new documentation --path="/home/reginaldo/Desenvolvimento" --name="docwrite"
+```
+
+
+
+
+
+
