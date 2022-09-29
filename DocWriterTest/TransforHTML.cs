@@ -72,5 +72,10 @@ public class TransforHTML
             var teste  = ArquivoConfiguracaoConf.PathDoProjeto("sage");
       }
 
+        [TestMethod]
+      public void BAsePath(){
+            var teste  = PathBase.GetPathBaseConf();
+      }
+
       
 }

@@ -7,7 +7,7 @@ public class ArquivoConfiguracaoConf
 {
      public static string PathDoProjeto(string projeto){
           
-          using (StreamReader sr = new StreamReader(NovoProjeto.GetPathBaseConf()))
+          using (StreamReader sr = new StreamReader(PathBase.GetPathBaseConf()))
           {
                string linhaEmLeitura = ""; 
                Regex rg = new  Regex(@"^.+:",RegexOptions.Compiled);

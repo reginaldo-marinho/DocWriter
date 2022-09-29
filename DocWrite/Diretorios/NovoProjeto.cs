@@ -6,14 +6,8 @@ public class NovoProjeto
 {
      
      public static void RegistraProjetoNaListaDeProjetos(string path,string projeto){
-          var pathListaProjetos = GetPathBaseConf();
+          var pathListaProjetos = PathBase.GetPathBaseConf();
           EscreverArquivo.AdicionarLinha(pathListaProjetos,$"{projeto}:{path}/{projeto}".Replace("//","/"));
-     }
-     public static string GetPathBaseConf(){
-          using (StreamReader rdBase = new StreamReader($"{Directory.GetCurrentDirectory()}/base.conf"))
-          {
-               return $"{rdBase.ReadLine()!.Replace("path:","")}/ProjectsDocWrite/projects.conf".Replace("//","/"); 
-          }
      }
      public static void CriarNovoProjeto(string path,string projeto,string tamplete){
           RegistraProjetoNaListaDeProjetos(path,projeto);
