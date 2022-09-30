@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
 using DocWrite.tag;
-
+using DocWrite.Diretorios;
 namespace DocWrite.Conversor;
 public class ExtracaoModelo:IExtracaoFuncao
  {
@@ -153,7 +153,7 @@ public class ExtracaoModelo:IExtracaoFuncao
         return new Atributo {AtributosHTML = AtributosHTML, AtributoClass = AtributoClass};
     }
     public ModeloHTML GetMappingModeloHTML(string identificador){
-        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/tagsHTML.json"))
+        using (StreamReader r = new StreamReader($"{PathBase.GetPathBaseDocWriter()}/DocWrite/tagsHTML.json".Replace("//","/")))
         {
             string json = r.ReadToEnd();
             return (from modeloHTML in  JsonSerializer.Deserialize<ModeloHTML[]>(json)
@@ -163,7 +163,7 @@ public class ExtracaoModelo:IExtracaoFuncao
         }
     }
     public ModeloAtributo GetMappingModeloAtributo(string atributo){
-        using (StreamReader r = new StreamReader("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/Atributos.json"))
+        using (StreamReader r = new StreamReader($"{PathBase.GetPathBaseDocWriter()}/DocWrite/Atributos.json".Replace("//","/")))
         {
             string json = r.ReadToEnd();
 

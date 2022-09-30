@@ -35,5 +35,9 @@ public class DiretoriosArquivosTest
             Assert.AreEqual("/home/reginaldo/Desenvolvimento/DocWriter/DocWrite/base.conf",PathBase.GetPathBaseProjecs());
       }
 
-      
+      [TestMethod]
+      public void ChecarCriarPasta(){
+            EstruturaProjeto EstruturaProjeto = new EstruturaProjeto(ArquivoConfiguracaoConf.CheckDiretorio("html","instroducao"));
+            EstruturaProjeto.ChecaPreparaEstruturaProjeto();
+      }
 }

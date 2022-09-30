@@ -35,9 +35,9 @@ public class NovoProjeto
           build.AppendLine($"endpoint:{path}");
           build.AppendLine("livro:{endpoint}/{proj}");
           build.AppendLine("pagina:{livro}/pages/{pagina}");
-          build.AppendLine("assets:/pages/{pagina}/assets");
-          build.AppendLine("html:/pages/{pagina}/{nome}.html");
-          build.AppendLine("fogx:/pages/{pagina}/{nome}.fogx");
+          build.AppendLine("assets:/{pagina}/assets");
+          build.AppendLine("html:/{pagina}/{nome}.html");
+          build.AppendLine("fogx:/{pagina}/{nome}.fogx");
           build.AppendLine($"tamplate:{tamplete}");
           CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/{projeto}.conf".Replace("//","/"));
           EscreverArquivo.Escrever($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());
