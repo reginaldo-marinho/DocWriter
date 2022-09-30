@@ -153,7 +153,7 @@ public class ExtracaoModelo:IExtracaoFuncao
         return new Atributo {AtributosHTML = AtributosHTML, AtributoClass = AtributoClass};
     }
     public ModeloHTML GetMappingModeloHTML(string identificador){
-        using (StreamReader r = new StreamReader($"{PathBase.GetPathBaseDocWriter()}/DocWrite/tagsHTML.json".Replace("//","/")))
+        using (StreamReader r = new StreamReader($"{PathBase.GetPathBaseDocWriter()}/DocWrite/Conversor/tagsHTML.json".Replace("//","/")))
         {
             string json = r.ReadToEnd();
             return (from modeloHTML in  JsonSerializer.Deserialize<ModeloHTML[]>(json)
@@ -163,7 +163,7 @@ public class ExtracaoModelo:IExtracaoFuncao
         }
     }
     public ModeloAtributo GetMappingModeloAtributo(string atributo){
-        using (StreamReader r = new StreamReader($"{PathBase.GetPathBaseDocWriter()}/DocWrite/Atributos.json".Replace("//","/")))
+        using (StreamReader r = new StreamReader($"{PathBase.GetPathBaseDocWriter()}/DocWrite/Conversor/Atributos.json".Replace("//","/")))
         {
             string json = r.ReadToEnd();
 
