@@ -57,26 +57,6 @@ public class TransforHTML
             extracao.ExtrairFuncao();
             textoTest = extracao.GetDocumentoFormatado();
       }
-      [TestMethod]
-      public void CheckDiretorio()
-      {
-            var teste =  ArquivoConfiguracaoConf.CheckDiretorio("sage","int roducao");
-      }
-
-      [TestMethod]
-      public void CriarNovoProjeto(){
-            NovoProjeto.CriarNovoProjeto("/home/reginaldo/Desenvolvimento","docwrite2","documentation");
-      }
-
-       [TestMethod]
-      public void ObterPathDoProjeto(){
-            var teste  = ArquivoConfiguracaoConf.PathDoProjeto("sage");
-      }
-
-        [TestMethod]
-      public void BAsePath(){
-            var teste  = PathBase.GetPathBaseConf();
-      }
-
+     
       
 }
