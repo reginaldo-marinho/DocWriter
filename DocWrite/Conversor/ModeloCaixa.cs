@@ -1,4 +1,4 @@
-namespace DocWrite;
+namespace DocWrite.Conversor;
 class ModeloCaixa:IExpressaoRegular
 {
      private readonly string ExpressaoRegular = @""; 

@@ -1,5 +1,6 @@
 ﻿using System.CommandLine;
 using DocWrite;
+using DocWrite.Conversor;
 using DocWrite.Diretorios;
 
 namespace DocWriteConsole

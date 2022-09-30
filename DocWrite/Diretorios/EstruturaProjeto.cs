@@ -1,7 +1,8 @@
-namespace DocWrite;
+namespace DocWrite.Conversor;
 using System.Text.RegularExpressions;
 using System.IO;
 using System.Text;
+
 
 public class EstruturaProjeto 
 {

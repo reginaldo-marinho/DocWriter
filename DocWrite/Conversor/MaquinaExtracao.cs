@@ -1,4 +1,4 @@
-namespace DocWrite;
+namespace DocWrite.Conversor;
 
 public class MaquinaExtracao
  {

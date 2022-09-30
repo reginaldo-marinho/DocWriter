@@ -1,5 +1,6 @@
 
 using DocWrite;
+using DocWrite.Conversor;
 using DocWrite.tag;
 using System.Text.RegularExpressions;
 using DocWrite.Diretorios;

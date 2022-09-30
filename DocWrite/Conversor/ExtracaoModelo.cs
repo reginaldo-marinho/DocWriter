@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 using System.Linq;
 using DocWrite.tag;
 
-namespace DocWrite;
+namespace DocWrite.Conversor;
 public class ExtracaoModelo:IExtracaoFuncao
  {
     private string ModeloInput;
