@@ -4,28 +4,16 @@ using System.IO;
 using System.Text;
 public class NovoProjeto
 {
-     
      public static void RegistraProjetoNaListaDeProjetos(string path,string projeto){
           var pathListaProjetos = PathBase.GetPathBaseProjecs();
           EscreverArquivo.AdicionarLinha(pathListaProjetos,$"{projeto}:{path}/{projeto}".Replace("//","/"));
      }
      public static void CriarNovoProjeto(string path,string projeto,string tamplete){
           RegistraProjetoNaListaDeProjetos(path,projeto);
-          StringBuilder build = new StringBuilder();
-          build.AppendLine($"proj:{projeto}");
-          build.AppendLine($"endpoint:{path}");
-          build.AppendLine("livro:{endpoint}/{proj}");
-          build.AppendLine("pagina:{livro}/pages/{pagina}");
-          build.AppendLine("assets:/pages/{pagina}/assets");
-          build.AppendLine("html:/pages/{pagina}/{nome}.html");
-          build.AppendLine("fogx:/pages/{pagina}/{nome}.fogx");
-          build.AppendLine($"tamplate:{tamplete}");
           CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}".Replace("//","/"));
-          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/{projeto}.conf".Replace("//","/"));
-          EscreverArquivo.Escrever($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());
+          CreateFileConfigurationPages(path,projeto,tamplete);
           CriarContentsDefult(path,projeto);
-          CopyContentsBase(path,projeto);
-          
+          CopyContentsBase(path,projeto);    
      }
      private static void CriarContentsDefult(string path,string projeto){
           CriacaoPasta.ChecarCriarDiretorio($"{path}/{projeto}/pages".Replace("//","/"));
@@ -40,5 +28,18 @@ public class NovoProjeto
           CopiaArquivosBase.CorpiarArquivosBase($"{pathbase}/index.html",$"{path}/{projeto}/index.html");
           CopiaArquivosBase.CorpiarArquivosBase($"{pathbase}/stylefogx.css",$"{path}/{projeto}/stylefogx.css");
           CopiaArquivosBase.CorpiarArquivosBase($"{pathbase}/init.json",$"{path}/{projeto}/init.json");          
+     }
+     private static void CreateFileConfigurationPages(string path,string projeto,string tamplete){
+          StringBuilder build = new StringBuilder();
+          build.AppendLine($"proj:{projeto}");
+          build.AppendLine($"endpoint:{path}");
+          build.AppendLine("livro:{endpoint}/{proj}");
+          build.AppendLine("pagina:{livro}/pages/{pagina}");
+          build.AppendLine("assets:/pages/{pagina}/assets");
+          build.AppendLine("html:/pages/{pagina}/{nome}.html");
+          build.AppendLine("fogx:/pages/{pagina}/{nome}.fogx");
+          build.AppendLine($"tamplate:{tamplete}");
+          CriacaoArquivo.ChecarCriarArquivo($"{path}/{projeto}/{projeto}.conf".Replace("//","/"));
+          EscreverArquivo.Escrever($"{path}/{projeto}/{projeto}.conf".Replace("//","/"),build.ToString());
      }
 }
