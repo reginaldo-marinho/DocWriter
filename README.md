@@ -136,6 +136,10 @@ Exemplo Real:
 ```
 
 
+```
+criar novo  projeto > doc new documentation --path="" --name="project name"
+criar novas paginas > doc project "Nome do projeto" add  "Nome da Pagina"
+```
 
 
 
