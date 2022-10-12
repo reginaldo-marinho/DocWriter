@@ -8,6 +8,6 @@ public class ModeloArquivoProjeto : IModeloArquivoProjeto
      public string Livro {get;set;} = "";
      public string Pagina {get;set;} = "";
      public string Assets{get;set;} = "";
-     public string HTML {get;set;} = "";
+     public string Content {get;set;} = "";
      public string FOGX {get;set;} = "";
 }

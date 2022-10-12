@@ -37,7 +37,14 @@ public class DiretoriosArquivosTest
 
       [TestMethod]
       public void ChecarCriarPasta(){
-            EstruturaProjeto EstruturaProjeto = new EstruturaProjeto(ArquivoConfiguracaoConf.CheckDiretorio("html","instroducao"));
+            EstruturaProjeto EstruturaProjeto = new EstruturaProjeto(ArquivoConfiguracaoConf.CheckDiretorio("sage-x3","introducao"));
             EstruturaProjeto.ChecaPreparaEstruturaProjeto();
+      }
+
+      [TestMethod]
+      public void RunPage(){
+            EstruturaProjeto EstruturaProjeto = new EstruturaProjeto(ArquivoConfiguracaoConf.CheckDiretorio("sage-x3","introducao"));
+            EstruturaProjeto.ChecaPreparaEstruturaProjeto();
+            EstruturaProjeto.Run();
       }
 }

@@ -58,8 +58,8 @@ public class ArquivoConfiguracaoConf
                               case "assets":
                                    modeloArquivo.Assets = ConteudoModeloConfiguracao;
                                    break;
-                              case "html":
-                                   modeloArquivo.HTML = ConteudoModeloConfiguracao;
+                              case "content":
+                                   modeloArquivo.Content = ConteudoModeloConfiguracao;
                                    break;
                               case "fogx":
                                    modeloArquivo.FOGX = ConteudoModeloConfiguracao;
@@ -68,20 +68,11 @@ public class ArquivoConfiguracaoConf
                          if(linhaProjeto == 7){
                               if (modeloArquivo  is not null)
                               {
-                                   modeloArquivo.Livro = modeloArquivo.Livro
-                                   .Replace("{proj}",modeloArquivo.Projeto)
-                                   .Replace("{endpoint}",modeloArquivo.EndPoint); 
-                                   modeloArquivo.Pagina = modeloArquivo.Pagina
-                                   .Replace("{livro}",modeloArquivo.Livro).
-                                   Replace("{pagina}",nomePagina);  
-                                   modeloArquivo.Assets = modeloArquivo.Assets
-                                   .Replace("{pagina}",modeloArquivo.Pagina); 
-                                   modeloArquivo.HTML = modeloArquivo.HTML
-                                   .Replace("{pagina}",modeloArquivo.Pagina)
-                                   .Replace("{nome}",nomePagina); 
-                                   modeloArquivo.FOGX = modeloArquivo.FOGX
-                                   .Replace("{pagina}",modeloArquivo.Pagina)
-                                   .Replace("{nome}",nomePagina); 
+                                   modeloArquivo.Livro = modeloArquivo.Livro.Replace("{proj}",modeloArquivo.Projeto).Replace("{endpoint}",modeloArquivo.EndPoint); 
+                                   modeloArquivo.Pagina = modeloArquivo.Pagina.Replace("{livro}",modeloArquivo.Livro).Replace("{pagina}",nomePagina);  
+                                   modeloArquivo.Assets = modeloArquivo.Assets.Replace("{pagina}",modeloArquivo.Pagina); 
+                                   modeloArquivo.Content = modeloArquivo.Content.Replace("{pagina}",modeloArquivo.Pagina).Replace("{nome}",nomePagina); 
+                                   modeloArquivo.FOGX = modeloArquivo.FOGX.Replace("{pagina}",modeloArquivo.Pagina).Replace("{nome}",nomePagina); 
                               }
 
                               break;

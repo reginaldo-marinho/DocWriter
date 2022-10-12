@@ -7,6 +7,6 @@ public interface IModeloArquivoProjeto
      string Livro {get;set;}
      string Pagina {get;set;}
      string Assets{get;set;}
-     string HTML {get;set;}
+     string Content {get;set;}
      string FOGX {get;set;}
 }

@@ -1,7 +1,8 @@
 namespace DocWrite.Conversor;
 using System.Text.RegularExpressions;
-using System.IO;
-using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using DocWrite.Content;
 
 
 public class EstruturaProjeto 
@@ -18,7 +19,7 @@ public class EstruturaProjeto
           if(!rg.Match(this.Projeto.Pagina).Value.Equals("/lc")){
                CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Livro);
                CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Pagina);
-               CriacaoArquivo.ChecarCriarArquivo(this.Projeto.HTML);
+               CopiaArquivosBase.CorpiarArquivosBase($"{PathBase.GetPathBaseDocWriter()}DocWrite/Files-base/content.json",this.Projeto.Content);
                CriacaoArquivo.ChecarCriarArquivo(this.Projeto.FOGX);
                CriacaoPasta.ChecarCriarDiretorio(this.Projeto.Assets);
           }
@@ -31,8 +32,10 @@ public class EstruturaProjeto
           GravarHTML();
      }
      private void GravarHTML(){
-          extracao = new ExtracaoModelo(new ModeloInput(LerTodoArquivo.LerTudo(Projeto.FOGX)),new ModeloFuncao());
-          extracao.ExtrairFuncao();
-          EscreverArquivo.Escrever(Projeto.HTML,extracao.GetDocumentoFormatado());
+          extracao = new ExtracaoModelo(new ModeloInput(LerTodoArquivo.LerTudo(Projeto.FOGX)),new ModeloFuncao());          
+          extracao.ExtrairFuncao ();
+          Content? content = JsonSerializer.Deserialize<Content>(this.Projeto.Content);
+          content.Body =  extracao.GetDocumentoFormatado();
+          EscreverArquivo.Escrever(Projeto.Content,JsonSerializer.Serialize<Content>(content));;
      }
 }
