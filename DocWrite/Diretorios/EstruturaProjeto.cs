@@ -27,15 +27,14 @@ public class EstruturaProjeto
      private  void ChecarCriarArquivoHTML(string path){
           CriacaoArquivo.ChecarCriarArquivo(path);
      }
-    
      public void Run(){
-          GravarHTML();
-     }
-     private void GravarHTML(){
           extracao = new ExtracaoModelo(new ModeloInput(LerTodoArquivo.LerTudo(Projeto.FOGX)),new ModeloFuncao());          
           extracao.ExtrairFuncao ();
-          Content? content = JsonSerializer.Deserialize<Content>(this.Projeto.Content);
-          content.Body =  extracao.GetDocumentoFormatado();
-          EscreverArquivo.Escrever(Projeto.Content,JsonSerializer.Serialize<Content>(content));;
+          GravarConteudoJSON();
+     }
+     private void GravarConteudoJSON(){
+          Content? content = JsonSerializer.Deserialize<Content>(LerTodoArquivo.LerTudo(this.Projeto.Content)); // Deserializa o arquivo JSON
+          content.Body =  extracao.GetDocumentoFormatado(); // Passa o  que foi convertido em HTMl  para o corpo Headers
+          EscreverArquivo.Escrever(Projeto.Content,JsonSerializer.Serialize<Content>(content));; // Convert a classe em uma  estring e reescreve o arquivo JSON
      }
 }
